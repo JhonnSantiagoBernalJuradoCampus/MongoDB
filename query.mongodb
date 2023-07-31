@@ -292,16 +292,58 @@ db.cliente.insertMany([
     }
 ]);
 
-db.registro_devolucion.insertOne({
-    _id: 1,
-    "ID_Registro": 1,
-    "alquiler_id": 1,
-    "empleado_id": 1,
-    "Fecha_Devolucion": "20/08/2023",
-    "Combustible_Devuelto": "5,16",
-    "Kilometraje_Devuelto": 4000,
-    "Monto_Adicional": "123,12"
-});
+db.registro_devolucion.insertMany([
+    {
+        _id: 1,
+        "ID_Registro": 1,
+        "alquiler_id": 1,
+        "empleado_id": 1,
+        "Fecha_Devolucion": "20/08/2023",
+        "Combustible_Devuelto": "5,16",
+        "Kilometraje_Devuelto": 4000,
+        "Monto_Adicional": "123,12"
+    },
+    {
+        _id: 2,
+        "ID_Registro": 2,
+        "alquiler_id": 1,
+        "empleado_id": 1,
+        "Fecha_Devolucion": "30/08/2023",
+        "Combustible_Devuelto": "4,70",
+        "Kilometraje_Devuelto": 5000,
+        "Monto_Adicional": "120,12"
+    },
+    {
+        _id: 3,
+        "ID_Registro": 3,
+        "alquiler_id": 1,
+        "empleado_id": 1,
+        "Fecha_Devolucion": "28/08/2023",
+        "Combustible_Devuelto": "12.21",
+        "Kilometraje_Devuelto": 1000,
+        "Monto_Adicional": "100.1"
+    },
+    {
+        _id: 4,
+        "ID_Registro": 4,
+        "alquiler_id": 1,
+        "empleado_id": 1,
+        "Fecha_Devolucion": "21/08/2023",
+        "Combustible_Devuelto": "6,2",
+        "Kilometraje_Devuelto": 500,
+        "Monto_Adicional": "210.124"
+    },
+    {
+        _id: 5,
+        "ID_Registro": 5,
+        "alquiler_id": 1,
+        "empleado_id": 1,
+        "Fecha_Devolucion": "26/08/2023",
+        "Combustible_Devuelto": "12.21",
+        "Kilometraje_Devuelto": 200,
+        "Monto_Adicional": "98.21"
+    }
+]);
 
 db.registro_entrega.insertOne({
     _id: 1,
