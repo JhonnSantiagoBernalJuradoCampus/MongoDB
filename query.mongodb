@@ -186,16 +186,58 @@ db.reserva.insertMany([
     }
 ]);
 
-db.alquiler.insertOne({
-    _id: 1,
-    "ID_Alquiler": 1,
-    "cliente_id": 1,
-    "automovil_id": 1,
-    "Fecha_Inicio": "19/08/2023",
-    "Fecha_Fin": "21/08/2023",
-    "Costo_Total": "600.000",
-    "Estado": "Alquilado" 
-});
+db.alquiler.insertMany([
+    {
+        _id: 1,
+        "ID_Alquiler": 1,
+        "cliente_id": 1,
+        "automovil_id": 1,
+        "Fecha_Inicio": "19/08/2023",
+        "Fecha_Fin": "21/08/2023",
+        "Costo_Total": "600.000",
+        "Estado": "Alquilado" 
+    },
+    {
+        _id: 2,
+        "ID_Alquiler": 2,
+        "cliente_id": 1,
+        "automovil_id": 1,
+        "Fecha_Inicio": "20/08/2023",
+        "Fecha_Fin": "22/08/2023",
+        "Costo_Total": "400.000",
+        "Estado": "Alquilado" 
+    },
+    {
+        _id: 3,
+        "ID_Alquiler": 3,
+        "cliente_id": 1,
+        "automovil_id": 1,
+        "Fecha_Inicio": "21/08/2023",
+        "Fecha_Fin": "23/08/2023",
+        "Costo_Total": "500.000",
+        "Estado": "Alquilado" 
+    },
+    {
+        _id: 4,
+        "ID_Alquiler": 4,
+        "cliente_id": 1,
+        "automovil_id": 1,
+        "Fecha_Inicio": "22/08/2023",
+        "Fecha_Fin": "24/08/2023",
+        "Costo_Total": "800.000",
+        "Estado": "Alquilado" 
+    },
+    {
+        _id: 5,
+        "ID_Alquiler": 5,
+        "cliente_id": 1,
+        "automovil_id": 1,
+        "Fecha_Inicio": "24/08/2023",
+        "Fecha_Fin": "27/08/2023",
+        "Costo_Total": "900.000",
+        "Estado": "Alquilado" 
+    }
+]);
 
 db.cliente.insertOne({
     _id: 1,
