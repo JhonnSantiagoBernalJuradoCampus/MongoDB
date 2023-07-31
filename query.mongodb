@@ -7,6 +7,7 @@ db.createCollection("alquiler");
 db.createCollection("cliente");
 db.createCollection("registro_devolucion");
 db.createCollection("registro_entrega");
+db.createCollection("empleado");
 
 db.sucursal.insertOne({
     _id: 1,
@@ -112,6 +113,17 @@ db.registro_entrega.insertOne({
     "Fecha_Entrega": "20/08/2023",
     "Combustible_Entregado": "40,12",
     "Kilometraje_Entregado": 200
+});
+
+db.empleado.insertOne({
+    _id: 1,
+    "ID_Empleado": 1,
+    "Nombre": "James Ronald",
+    "Apellido": "Bernal Bermudez",
+    "DNI": 91514559,
+    "Direccion": "Cr8 #12-12",
+    "Telefono": 3127141832,
+    "Cargo": "Jefe de almacen"
 })
 
 /**
@@ -320,6 +332,33 @@ db.alquiler.aggregate([
             _id: 0,
             "cliente_id": 0,
             "Registro_Entrega.empleado_id": 0
+        }
+    }
+]);
+
+/**
+ * Relacion empleado a registro_devolucion
+ */
+use("db_campus_alquiler");
+db.empleado.aggregate([
+    {
+        $match: {
+            ID_Empleado: 1
+        }
+    },
+    {
+        $lookup: {
+            from: "registro_devolucion",
+            localField: "_id",
+            foreignField: "empleado_id",
+            as: "Registro_Devolucion"
+        }
+    },
+    {
+        $project: {
+            _id: 0,
+            "Registro_Devolucion.alquiler_id": 0,
+            "Registro_Devolucion.empleado_id": 0
         }
     }
 ]);
