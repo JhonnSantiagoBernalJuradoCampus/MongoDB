@@ -358,7 +358,32 @@ db.empleado.aggregate([
         $project: {
             _id: 0,
             "Registro_Devolucion.alquiler_id": 0,
-            "Registro_Devolucion.empleado_id": 0
+        }
+    }
+]);
+
+/**
+ * Relacion empleado a registro_entrega
+ */
+use("db_campus_alquiler");
+db.empleado.aggregate([
+    {
+        $match: {
+            ID_Empleado: 1
+        }
+    },
+    {
+        $lookup: {
+            from: "registro_entrega",
+            localField: "_id",
+            foreignField: "empleado_id",
+            as: "Registro_Entrega"
+        }
+    },
+    {
+        $project: {
+            _id: 0,
+            "Registro_Entrega.alquiler_id": 0
         }
     }
 ]);
