@@ -393,16 +393,58 @@ db.registro_entrega.insertMany([
     }
 ]);
 
-db.empleado.insertOne({
-    _id: 1,
-    "ID_Empleado": 1,
-    "Nombre": "James Ronald",
-    "Apellido": "Bernal Bermudez",
-    "DNI": 91514559,
-    "Direccion": "Cr8 #12-12",
-    "Telefono": 3127141832,
-    "Cargo": "Jefe de almacen"
-})
+db.empleado.insertMany([
+    {
+        _id: 1,
+        "ID_Empleado": 1,
+        "Nombre": "James Ronald",
+        "Apellido": "Bernal Bermudez",
+        "DNI": 91514559,
+        "Direccion": "Cr8 #12-12",
+        "Telefono": 3127141832,
+        "Cargo": "Jefe de almacen"
+    },
+    {
+        _id: 2,
+        "ID_Empleado": 2,
+        "Nombre": "Stiven",
+        "Apellido": "Carvajal",
+        "DNI": 84392389,
+        "Direccion": "Cr4 #20-40",
+        "Telefono": 3124234876,
+        "Cargo": "Trainer"
+    },
+    {
+        _id: 3,
+        "ID_Empleado": 3,
+        "Nombre": "Miguel",
+        "Apellido": "Carrillo",
+        "DNI": 64432341,
+        "Direccion": "Cr2 #54-21",
+        "Telefono": 312343245,
+        "Cargo": "Coordinador"
+    },
+    {
+        _id: 4,
+        "ID_Empleado": 4,
+        "Nombre": "Jolver",
+        "Apellido": "Prado",
+        "DNI": 53423412,
+        "Direccion": "Cr43 #76-98",
+        "Telefono": 312334344,
+        "Cargo": "CEO"
+    },
+    {
+        _id: 5,
+        "ID_Empleado": 5,
+        "Nombre": "Andres",
+        "Apellido": "Sepulveda",
+        "DNI": 65423442,
+        "Direccion": "Cr12 #12-12",
+        "Telefono": 312314322,
+        "Cargo": "Aseo"
+    }
+]);
 
 /**
  * Relacion de sucursal a sucursal_automovil
