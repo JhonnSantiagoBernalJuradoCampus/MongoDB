@@ -9,24 +9,96 @@ db.createCollection("registro_devolucion");
 db.createCollection("registro_entrega");
 db.createCollection("empleado");
 
-db.sucursal.insertOne({
-    _id: 1,
-    "ID_sucursal": 1,
-    "Nombre": "Zona Franca",
-    "Direccion": "Florida",
-    "Telefono": 987654321
-});
+db.sucursal.insertMany([
+    {
+        _id: 1,
+        "ID_sucursal": 1,
+        "Nombre": "Zona Franca",
+        "Direccion": "Florida",
+        "Telefono": 987654321
+    },
+    {
+        _id: 2,
+        "ID_sucursal": 2,
+        "Nombre": "Mexico",
+        "Direccion": "City Mecico",
+        "Telefono": 123457632
+    },
+    {
+        _id: 3,
+        "ID_sucursal": 3,
+        "Nombre": "Barcelona",
+        "Direccion": "España",
+        "Telefono": 312441312
+    },
+    {
+        _id: 4,
+        "ID_sucursal": 4,
+        "Nombre": "Irlanda",
+        "Direccion": "Argentina",
+        "Telefono": 432943212
+    },
+    {
+        _id: 5,
+        "ID_sucursal": 5,
+        "Nombre": "Miami",
+        "Direccion": "EEUU",
+        "Telefono": 754532344
+    }
+]);
 
-db.automovil.insertOne({
-    _id: 1,
-    "ID_Automovil": 1,
-    "Marca": "Renault",
-    "Modelo": "Renault Sandero",
-    "Anio": 2023,
-    "Tipo": "Carro",
-    "Capacidad": "4 personas",
-    "Precio_Diario": "500.000"
-});
+db.automovil.insertMany([
+    {
+        _id: 1,
+        "ID_Automovil": 1,
+        "Marca": "Renault",
+        "Modelo": "Renault Sandero",
+        "Anio": 2023,
+        "Tipo": "Carro",
+        "Capacidad": "4 personas",
+        "Precio_Diario": "500.000"
+    },
+    {
+        _id: 2,
+        "ID_Automovil": 2,
+        "Marca": "Renault",
+        "Modelo": "Renault 123",
+        "Anio": 2020,
+        "Tipo": "Carro",
+        "Capacidad": "4 personas",
+        "Precio_Diario": "300.000"
+    },
+    {
+        _id: 3,
+        "ID_Automovil": 3,
+        "Marca": "Renault",
+        "Modelo": "Renault 321",
+        "Anio": 2021,
+        "Tipo": "Carro",
+        "Capacidad": "4 personas",
+        "Precio_Diario": "122.000"
+    },
+    {
+        _id: 4,
+        "ID_Automovil": 4,
+        "Marca": "Renault",
+        "Modelo": "Renault 432",
+        "Anio": 2010,
+        "Tipo": "Carro",
+        "Capacidad": "5 personas",
+        "Precio_Diario": "600.000"
+    },
+    {
+        _id: 5,
+        "ID_Automovil": 5,
+        "Marca": "Renault",
+        "Modelo": "Renault 543",
+        "Anio": 2019,
+        "Tipo": "Carro",
+        "Capacidad": "4 personas",
+        "Precio_Diario": "102.000"
+    }
+]);
 
 db.sucursal_automovil.insertMany([
     {
