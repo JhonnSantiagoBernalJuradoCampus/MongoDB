@@ -133,16 +133,58 @@ db.sucursal_automovil.insertMany([
     }
 ]);
 
-db.reserva.insertOne({
-    _id: 1,
-    "ID_Reserva": 1,
-    "cliente_id": 1,
-    "automovil_id": 1,
-    "Fecha_Reserva": "11/08/2023",
-    "Fecha_Inicio": "18/08/2023",
-    "Fecha_Fin": "20/08/2023",
-    "Estado": "Reservado"
-});
+db.reserva.insertMany([
+    {
+        _id: 1,
+        "ID_Reserva": 1,
+        "cliente_id": 1,
+        "automovil_id": 1,
+        "Fecha_Reserva": "11/08/2023",
+        "Fecha_Inicio": "18/08/2023",
+        "Fecha_Fin": "20/08/2023",
+        "Estado": "Reservado"
+    },
+    {
+        _id: 2,
+        "ID_Reserva": 2,
+        "cliente_id": 1,
+        "automovil_id": 1,
+        "Fecha_Reserva": "13/08/2023",
+        "Fecha_Inicio": "19/08/2023",
+        "Fecha_Fin": "22/08/2023",
+        "Estado": "Reservado"
+    },
+    {
+        _id: 3,
+        "ID_Reserva": 3,
+        "cliente_id": 1,
+        "automovil_id": 1,
+        "Fecha_Reserva": "15/08/2023",
+        "Fecha_Inicio": "16/08/2023",
+        "Fecha_Fin": "21/08/2023",
+        "Estado": "Reservado"
+    },
+    {
+        _id: 4,
+        "ID_Reserva": 4,
+        "cliente_id": 1,
+        "automovil_id": 1,
+        "Fecha_Reserva": "20/08/2023",
+        "Fecha_Inicio": "28/08/2023",
+        "Fecha_Fin": "30/08/2023",
+        "Estado": "Reservado"
+    },
+    {
+        _id: 5,
+        "ID_Reserva": 5,
+        "cliente_id": 1,
+        "automovil_id": 1,
+        "Fecha_Reserva": "12/08/2023",
+        "Fecha_Inicio": "15/08/2023",
+        "Fecha_Fin": "17/08/2023",
+        "Estado": "Reservado"
+    }
+]);
 
 db.alquiler.insertOne({
     _id: 1,
