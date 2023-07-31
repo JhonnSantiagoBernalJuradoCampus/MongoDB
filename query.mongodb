@@ -4,6 +4,7 @@ db.createCollection("sucursal_automovil");
 db.createCollection("automovil");
 db.createCollection("reserva");
 db.createCollection("alquiler");
+db.createCollection("cliente");
 
 db.sucursal.insertOne({
     _id: 1,
@@ -22,7 +23,7 @@ db.automovil.insertOne({
     "Tipo": "Carro",
     "Capacidad": "4 personas",
     "Precio_Diario": "500.000"
-})
+});
 
 db.sucursal_automovil.insertMany([
     {
@@ -66,7 +67,7 @@ db.reserva.insertOne({
     "Fecha_Inicio": "18/08/2023",
     "Fecha_Fin": "20/08/2023",
     "Estado": "Reservado"
-})
+});
 
 db.alquiler.insertOne({
     _id: 1,
@@ -77,7 +78,18 @@ db.alquiler.insertOne({
     "Fecha_Fin": "21/08/2023",
     "Costo_Total": "600.000",
     "Estado": "Alquilado" 
-})
+});
+
+db.cliente.insertOne({
+    _id: 1,
+    "ID_Cliente": 1,
+    "Nombre": "Jhon Santiago",
+    "Apellido": "Bernal Jurado",
+    "DNI": 109821901,
+    "Direccion": "Cr 6 #90-12",
+    "Telefono": 3123860654,
+    "Email": "jbernalsantiago@gmail.com"
+});
 
 /**
  * Relacion de sucursal a sucursal_automovil
@@ -179,6 +191,32 @@ db.automovil.aggregate([
         $project: {
             _id: 0,
             "Alquiler.cliente_id": 0
+        }
+    }
+]);
+
+/**
+ * Relacion cliente a reserva
+ */
+use("db_campus_alquiler");
+db.cliente.aggregate([
+    {
+        $match: {
+            ID_Cliente: 1
+        }
+    },
+    {
+        $lookup: {
+            from: "reserva",
+            localField: "_id",
+            foreignField: "cliente_id",
+            as: "Reserva"
+        }
+    },
+    {
+        $project: {
+            _id: 0,
+            "Reserva.automovil_id": 0
         }
     }
 ])
