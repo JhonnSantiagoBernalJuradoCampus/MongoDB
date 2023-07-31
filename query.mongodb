@@ -2,6 +2,7 @@ use("db_campus_alquiler");
 db.createCollection("sucursal");
 db.createCollection("sucursal_automovil");
 db.createCollection("automovil");
+db.createCollection("reserva");
 
 db.sucursal.insertOne({
     _id: 1,
@@ -55,6 +56,21 @@ db.sucursal_automovil.insertMany([
     }
 ]);
 
+db.reserva.insertOne({
+    _id: 1,
+    "ID_Reserva": 1,
+    "cliente_id": 1,
+    "automovil_id": 1,
+    "Fecha_Reserva": "11/08/2023",
+    "Fecha_Inicio": "18/08/2023",
+    "Fecha_Fin": "20/08/2023",
+    "Estado": "Reservado"
+})
+
+
+/**
+ * Relacion de sucursal a sucursal_automovil
+ */
 use("db_campus_alquiler");
 db.sucursal.aggregate([
     {
@@ -78,6 +94,9 @@ db.sucursal.aggregate([
     }
 ]);
 
+/**
+ * Relacion de automovil a sucursal_automovil
+ */
 use("db_campus_alquiler");
 db.automovil.aggregate([
     {
@@ -97,6 +116,33 @@ db.automovil.aggregate([
         $project: {
             _id: 0,
             "Sucursal.sucursal_id": 0
+        }
+    }
+]);
+
+
+/**
+ * Relacion de automovil a reserva
+*/
+use("db_campus_alquiler");
+db.automovil.aggregate([
+    {
+        $match: {
+            ID_Automovil: 1
+        }
+    },
+    {
+        $lookup: {
+            from: "reserva",
+            localField: "_id",
+            foreignField: "automovil_id",
+            as: "Reserva"
+        }
+    },
+    {
+        $project: {
+            _id: 0,
+            "Reserva.cliente_id": 0
         }
     }
 ]);
