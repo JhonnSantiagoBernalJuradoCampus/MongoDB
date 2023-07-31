@@ -1,6 +1,7 @@
 use("db_campus_alquiler");
 db.createCollection("sucursal");
 db.createCollection("sucursal_automovil");
+db.createCollection("automovil");
 
 db.sucursal.insertOne({
     _id: 1,
@@ -10,12 +11,51 @@ db.sucursal.insertOne({
     "Telefono": 987654321
 });
 
-db.sucursal_automovil.insertOne({
+db.automovil.insertOne({
     _id: 1,
-    sucursal_id: 1,
-    Cantidad_Disponible: 5
-});
+    "ID_Automovil": 1,
+    "Marca": "Renault",
+    "Modelo": "Renault Sandero",
+    "Anio": 2023,
+    "Tipo": "Carro",
+    "Capacidad": "4 personas",
+    "Precio_Diario": "500.000"
+})
 
+db.sucursal_automovil.insertMany([
+    {
+        _id: 1,
+        "sucursal_id": 1,
+        "automovil_id": 1,
+        "Cantidad_Disponible": 5
+    },
+    {
+        _id: 2,
+        "sucursal_id": 1,
+        "automovil_id": 1,
+        "Cantidad_Disponible": 3
+    },
+    {
+        _id: 3,
+        "sucursal_id": 1,
+        "automovil_id": 1,
+        "Cantidad_Disponible": 4
+    },
+    {
+        _id: 4,
+        "sucursal_id": 1,
+        "automovil_id": 1,
+        "Cantidad_Disponible": 4
+    },
+    {
+        _id: 5,
+        "sucursal_id": 1,
+        "automovil_id": 1,
+        "Cantidad_Disponible": 4
+    }
+]);
+
+use("db_campus_alquiler");
 db.sucursal.aggregate([
     {
         $match: {
@@ -27,15 +67,36 @@ db.sucursal.aggregate([
             from: "sucursal_automovil",
             localField: "_id",
             foreignField: "sucursal_id",
-            as: "autos" 
+            as: "Sucursal" 
         }
     },
     {
         $project: {
-            _id: 0, 
-            Nombre: 1, 
-            "autos._id": 1,
-            "autos.Cantidad_Disponible": 1 
+            _id: 0,
+            "Sucursal.automovil_id": 0
+        }
+    }
+]);
+
+use("db_campus_alquiler");
+db.automovil.aggregate([
+    {
+        $match: {
+            ID_Automovil: 1
+        }
+    },
+    {
+        $lookup: {
+            from: "sucursal_automovil",
+            localField: "_id",
+            foreignField: "automovil_id",
+            as: "Sucursal"
+        }
+    },
+    {
+        $project: {
+            _id: 0,
+            "Sucursal.sucursal_id": 0
         }
     }
 ]);
