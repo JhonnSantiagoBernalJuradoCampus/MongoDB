@@ -1,0 +1,26 @@
+use("db_campus_alquiler");
+db.createCollection("sucursal");
+db.createCollection("sucursal_automovil");
+
+db.sucursal.insertOne({
+    _id: 1,
+    "ID_sucursal": 1,
+    "Nombre": "Zona Franca",
+    "Direccion": "Florida",
+    "Telefono": 987654321
+});
+
+db.sucursal_automovil.insertOne({
+    _id: 1,
+    sucursal_id: 1,
+    Cantidad_Disponible: 5
+});
+
+db.getCollection("sucursal").aggregate({
+    $lookup: {
+        from: "sucursal_automovil",
+        localField: "_id",
+        foreignField: "sucursal_id",
+        as: "Relacion_fk"
+    }
+})
