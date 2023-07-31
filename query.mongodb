@@ -6,6 +6,7 @@ db.createCollection("reserva");
 db.createCollection("alquiler");
 db.createCollection("cliente");
 db.createCollection("registro_devolucion");
+db.createCollection("registro_entrega");
 
 db.sucursal.insertOne({
     _id: 1,
@@ -102,6 +103,16 @@ db.registro_devolucion.insertOne({
     "Kilometraje_Devuelto": 4000,
     "Monto_Adicional": "123,12"
 });
+
+db.registro_entrega.insertOne({
+    _id: 1,
+    "ID_Registro": 1,
+    "alquiler_id": 1,
+    "empleado_id": 1,
+    "Fecha_Entrega": "20/08/2023",
+    "Combustible_Entregado": "40,12",
+    "Kilometraje_Entregado": 200
+})
 
 /**
  * Relacion de sucursal a sucursal_automovil
@@ -282,6 +293,33 @@ db.alquiler.aggregate([
             _id: 0,
             "cliente_id": 0,
             "Registro_Devolucion.empleado_id": 0
+        }
+    }
+]);
+
+/**
+ * Relacion alquiler a registro_entrega
+ */
+use("db_campus_alquiler");
+db.alquiler.aggregate([
+    {
+        $match: {
+            ID_Alquiler: 1
+        }
+    },
+    {
+        $lookup: {
+            from: "registro_entrega",
+            localField: "_id",
+            foreignField: "alquiler_id",
+            as: "Registro_Entrega"
+        }
+    },
+    {
+        $project: {
+            _id: 0,
+            "cliente_id": 0,
+            "Registro_Entrega.empleado_id": 0
         }
     }
 ]);
