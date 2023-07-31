@@ -239,16 +239,58 @@ db.alquiler.insertMany([
     }
 ]);
 
-db.cliente.insertOne({
-    _id: 1,
-    "ID_Cliente": 1,
-    "Nombre": "Jhon Santiago",
-    "Apellido": "Bernal Jurado",
-    "DNI": 109821901,
-    "Direccion": "Cr 6 #90-12",
-    "Telefono": 3123860654,
-    "Email": "jbernalsantiago@gmail.com"
-});
+db.cliente.insertMany([
+    {
+        _id: 1,
+        "ID_Cliente": 1,
+        "Nombre": "Jhon Santiago",
+        "Apellido": "Bernal Jurado",
+        "DNI": 109821901,
+        "Direccion": "Cr 6 #90-12",
+        "Telefono": 3123860654,
+        "Email": "jbernalsantiago@gmail.com"
+    },
+    {
+        _id: 2,
+        "ID_Cliente": 2,
+        "Nombre": "Daniel",
+        "Apellido": "Hernandez",
+        "DNI": 489213981,
+        "Direccion": "Cr 4 #20-10",
+        "Telefono": 3123342422,
+        "Email": "danielhernandez@gmail.com"
+    },
+    {
+        _id: 3,
+        "ID_Cliente": 3,
+        "Nombre": "Diego",
+        "Apellido": "Quintero",
+        "DNI": 109532412,
+        "Direccion": "Cr 3 #30-2",
+        "Telefono": 3118124324,
+        "Email": "diegoquintero@gmail.com"
+    },
+    {
+        _id: 4,
+        "ID_Cliente": 4,
+        "Nombre": "Angie",
+        "Apellido": "Cala",
+        "DNI": 100532853,
+        "Direccion": "Cr 1 #50-40",
+        "Telefono": 3118128028,
+        "Email": "angiecala@gmail.com"
+    },
+    {
+        _id: 5,
+        "ID_Cliente": 5,
+        "Nombre": "Angela",
+        "Apellido": "Esperanza",
+        "DNI": 63542975,
+        "Direccion": "Cr 20 #10-10",
+        "Telefono": 3166010786,
+        "Email": "angelaesperanza@gmail.com"
+    }
+]);
 
 db.registro_devolucion.insertOne({
     _id: 1,
