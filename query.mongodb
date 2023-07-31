@@ -16,11 +16,26 @@ db.sucursal_automovil.insertOne({
     Cantidad_Disponible: 5
 });
 
-db.getCollection("sucursal").aggregate({
-    $lookup: {
-        from: "sucursal_automovil",
-        localField: "_id",
-        foreignField: "sucursal_id",
-        as: "Relacion_fk"
+db.sucursal.aggregate([
+    {
+        $match: {
+            ID_sucursal: 1 
+        }
+    },
+    {
+        $lookup: {
+            from: "sucursal_automovil",
+            localField: "_id",
+            foreignField: "sucursal_id",
+            as: "autos" 
+        }
+    },
+    {
+        $project: {
+            _id: 0, 
+            Nombre: 1, 
+            "autos._id": 1,
+            "autos.Cantidad_Disponible": 1 
+        }
     }
-})
+]);
