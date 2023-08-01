@@ -200,7 +200,7 @@ db.alquileres.insertMany([
     {
         _id: 2,
         "ID_Alquiler": 2,
-        "cliente_id": 1,
+        "cliente_id": 2,
         "automovil_id": 2,
         "Fecha_Inicio": "2023-08-20",
         "Fecha_Fin": "2023-08-22",
@@ -220,7 +220,7 @@ db.alquileres.insertMany([
     {
         _id: 4,
         "ID_Alquiler": 4,
-        "cliente_id": 2,
+        "cliente_id": 3,
         "automovil_id": 4,
         "Fecha_Inicio": "2023-08-22",
         "Fecha_Fin": "2023-08-24",
@@ -412,7 +412,7 @@ db.empleados.insertMany([
         "DNI": 84392389,
         "Direccion": "Cr4 #20-40",
         "Telefono": 3124234876,
-        "Cargo": "Vendedor"
+        "Cargo": "Gerente"
     },
     {
         _id: 3,
@@ -422,7 +422,7 @@ db.empleados.insertMany([
         "DNI": 64432341,
         "Direccion": "Cr2 #54-21",
         "Telefono": 312343245,
-        "Cargo": "Coordinador"
+        "Cargo": "Asistente"
     },
     {
         _id: 4,
@@ -432,7 +432,7 @@ db.empleados.insertMany([
         "DNI": 53423412,
         "Direccion": "Cr43 #76-98",
         "Telefono": 312334344,
-        "Cargo": "CEO"
+        "Cargo": "Asistente"
     },
     {
         _id: 5,
@@ -858,3 +858,56 @@ db.clientes.aggregate([
         }
     }
 ]);
+
+/** Mostrar los empleados con cargo de "Gerente" o "Asistente*/
+use("db_campus_alquiler")
+db.empleados.find({$or: [{Cargo: {$eq: "Gerente"}},{Cargo: {$eq: "Asistente"}}]});
+
+/**Obtener los datos de los clientes que realizaron al menos un alquiler. */
+use("db_campus_alquiler")
+db.clientes.aggregate([
+    {
+        $lookup: {
+            from: "alquileres",
+            localField: "_id",
+            foreignField: "cliente_id",
+            as: "Alquiler"
+        }
+    },
+    {
+        $match: {
+            "Alquiler": {$ne: []}
+        }
+    },
+    {
+        $project: {
+            "Alquiler._id": 0,
+            "Alquiler.automovil_id": 0,
+            "Alquiler.Fecha_Inicio": 0,
+            "Alquiler.Fecha_Fin": 0,
+            "Alquiler.Costo_Total": 0
+        }
+    }
+]);
+
+/**Listar todos los automóviles ordenados por marca y modelo */
+use("db_campus_alquiler");
+db.automoviles.aggregate([{
+    $sort: {
+        "Marca":1,
+        "Modelo": 1 
+    }
+}]);
+
+/**Mostrar la cantidad total de automóviles en cada sucursal junto con su dirección */
+use("db_campus_alquiler");
+db.sucursal_automoviles.aggregate([
+    {
+        $lookup: {
+            from: "sucursales",
+            localField: "sucursal_id",
+            foreignField: "ID_sucursal",
+            as: "Automovil"
+        }
+    }
+])
