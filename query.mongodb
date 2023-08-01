@@ -1,15 +1,15 @@
 use("db_campus_alquiler");
-db.createCollection("sucursal");
-db.createCollection("sucursal_automovil");
-db.createCollection("automovil");
-db.createCollection("reserva");
-db.createCollection("alquiler");
-db.createCollection("cliente");
-db.createCollection("registro_devolucion");
-db.createCollection("registro_entrega");
-db.createCollection("empleado");
+db.createCollection("sucursales");
+db.createCollection("sucursal_automoviles");
+db.createCollection("automoviles");
+db.createCollection("reservas");
+db.createCollection("alquileres");
+db.createCollection("clientes");
+db.createCollection("registro_devoluciones");
+db.createCollection("registro_entregas");
+db.createCollection("empleados");
 
-db.sucursal.insertMany([
+db.sucursales.insertMany([
     {
         _id: 1,
         "ID_sucursal": 1,
@@ -47,7 +47,7 @@ db.sucursal.insertMany([
     }
 ]);
 
-db.automovil.insertMany([
+db.automoviles.insertMany([
     {
         _id: 1,
         "ID_Automovil": 1,
@@ -100,7 +100,7 @@ db.automovil.insertMany([
     }
 ]);
 
-db.sucursal_automovil.insertMany([
+db.sucursal_automoviles.insertMany([
     {
         _id: 1,
         "sucursal_id": 1,
@@ -133,7 +133,7 @@ db.sucursal_automovil.insertMany([
     }
 ]);
 
-db.reserva.insertMany([
+db.reservas.insertMany([
     {
         _id: 1,
         "ID_Reserva": 1,
@@ -186,7 +186,7 @@ db.reserva.insertMany([
     }
 ]);
 
-db.alquiler.insertMany([
+db.alquileres.insertMany([
     {
         _id: 1,
         "ID_Alquiler": 1,
@@ -239,7 +239,7 @@ db.alquiler.insertMany([
     }
 ]);
 
-db.cliente.insertMany([
+db.clientes.insertMany([
     {
         _id: 1,
         "ID_Cliente": 1,
@@ -292,7 +292,7 @@ db.cliente.insertMany([
     }
 ]);
 
-db.registro_devolucion.insertMany([
+db.registro_devoluciones.insertMany([
     {
         _id: 1,
         "ID_Registro": 1,
@@ -345,7 +345,7 @@ db.registro_devolucion.insertMany([
     }
 ]);
 
-db.registro_entrega.insertMany([
+db.registro_entregas.insertMany([
     {
         _id: 1,
         "ID_Registro": 1,
@@ -393,7 +393,7 @@ db.registro_entrega.insertMany([
     }
 ]);
 
-db.empleado.insertMany([
+db.empleados.insertMany([
     {
         _id: 1,
         "ID_Empleado": 1,
@@ -450,7 +450,7 @@ db.empleado.insertMany([
  * Relacion de sucursal a sucursal_automovil
  */
 use("db_campus_alquiler");
-db.sucursal.aggregate([
+db.sucursales.aggregate([
     {
         $match: {
             ID_sucursal: 1 
@@ -458,7 +458,7 @@ db.sucursal.aggregate([
     },
     {
         $lookup: {
-            from: "sucursal_automovil",
+            from: "sucursal_automoviles",
             localField: "_id",
             foreignField: "sucursal_id",
             as: "Sucursal" 
@@ -476,7 +476,7 @@ db.sucursal.aggregate([
  * Relacion de automovil a sucursal_automovil
  */
 use("db_campus_alquiler");
-db.automovil.aggregate([
+db.automoviles.aggregate([
     {
         $match: {
             ID_Automovil: 1
@@ -484,7 +484,7 @@ db.automovil.aggregate([
     },
     {
         $lookup: {
-            from: "sucursal_automovil",
+            from: "sucursal_automoviles",
             localField: "_id",
             foreignField: "automovil_id",
             as: "Sucursal"
@@ -502,7 +502,7 @@ db.automovil.aggregate([
  * Relacion de automovil a reserva
 */
 use("db_campus_alquiler");
-db.automovil.aggregate([
+db.automoviles.aggregate([
     {
         $match: {
             ID_Automovil: 1
@@ -510,7 +510,7 @@ db.automovil.aggregate([
     },
     {
         $lookup: {
-            from: "reserva",
+            from: "reservas",
             localField: "_id",
             foreignField: "automovil_id",
             as: "Reserva"
@@ -528,7 +528,7 @@ db.automovil.aggregate([
  * Relacion de automovil a alquiler
  */
 use("db_campus_alquiler");
-db.automovil.aggregate([
+db.automoviles.aggregate([
     {
         $match: {
             ID_Automovil: 1
@@ -536,7 +536,7 @@ db.automovil.aggregate([
     },
     {
         $lookup: {
-            from: "alquiler",
+            from: "alquileres",
             localField: "_id",
             foreignField: "automovil_id",
             as: "Alquiler"
@@ -554,7 +554,7 @@ db.automovil.aggregate([
  * Relacion cliente a reserva
  */
 use("db_campus_alquiler");
-db.cliente.aggregate([
+db.clientes.aggregate([
     {
         $match: {
             ID_Cliente: 1
@@ -562,7 +562,7 @@ db.cliente.aggregate([
     },
     {
         $lookup: {
-            from: "reserva",
+            from: "reservas",
             localField: "_id",
             foreignField: "cliente_id",
             as: "Reserva"
@@ -580,7 +580,7 @@ db.cliente.aggregate([
  * Relacion cliente a alquiler
  */
 use("db_campus_alquiler");
-db.cliente.aggregate([
+db.clientes.aggregate([
     {
         $match: {
             ID_Cliente: 1
@@ -588,7 +588,7 @@ db.cliente.aggregate([
     },
     {
         $lookup: {
-            from: "alquiler",
+            from: "alquileres",
             localField: "_id",
             foreignField: "cliente_id",
             as: "Alquiler"
@@ -606,7 +606,7 @@ db.cliente.aggregate([
  * Relacion alquiler a registro_devolucion
  */
 use("db_campus_alquiler");
-db.alquiler.aggregate([
+db.alquileres.aggregate([
     {
         $match: {
             ID_Alquiler: 1
@@ -614,7 +614,7 @@ db.alquiler.aggregate([
     },
     {
         $lookup: {
-            from: "registro_devolucion",
+            from: "registro_devoluciones",
             localField: "_id",
             foreignField: "alquiler_id",
             as: "Registro_Devolucion"
@@ -633,7 +633,7 @@ db.alquiler.aggregate([
  * Relacion alquiler a registro_entrega
  */
 use("db_campus_alquiler");
-db.alquiler.aggregate([
+db.alquileres.aggregate([
     {
         $match: {
             ID_Alquiler: 1
@@ -641,7 +641,7 @@ db.alquiler.aggregate([
     },
     {
         $lookup: {
-            from: "registro_entrega",
+            from: "registro_entregas",
             localField: "_id",
             foreignField: "alquiler_id",
             as: "Registro_Entrega"
@@ -660,7 +660,7 @@ db.alquiler.aggregate([
  * Relacion empleado a registro_devolucion
  */
 use("db_campus_alquiler");
-db.empleado.aggregate([
+db.empleados.aggregate([
     {
         $match: {
             ID_Empleado: 1
@@ -668,7 +668,7 @@ db.empleado.aggregate([
     },
     {
         $lookup: {
-            from: "registro_devolucion",
+            from: "registro_devoluciones",
             localField: "_id",
             foreignField: "empleado_id",
             as: "Registro_Devolucion"
@@ -686,7 +686,7 @@ db.empleado.aggregate([
  * Relacion empleado a registro_entrega
  */
 use("db_campus_alquiler");
-db.empleado.aggregate([
+db.empleados.aggregate([
     {
         $match: {
             ID_Empleado: 1
@@ -694,7 +694,7 @@ db.empleado.aggregate([
     },
     {
         $lookup: {
-            from: "registro_entrega",
+            from: "registro_entregas",
             localField: "_id",
             foreignField: "empleado_id",
             as: "Registro_Entrega"
