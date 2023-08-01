@@ -55,7 +55,7 @@ db.automoviles.insertMany([
         "Modelo": "Renault Sandero",
         "Anio": 2023,
         "Tipo": "Carro",
-        "Capacidad": "4 personas",
+        "Capacidad": 4,
         "Precio_Diario": "500.000"
     },
     {
@@ -65,7 +65,7 @@ db.automoviles.insertMany([
         "Modelo": "Renault 123",
         "Anio": 2020,
         "Tipo": "Carro",
-        "Capacidad": "4 personas",
+        "Capacidad": 6,
         "Precio_Diario": "300.000"
     },
     {
@@ -75,7 +75,7 @@ db.automoviles.insertMany([
         "Modelo": "Renault 321",
         "Anio": 2021,
         "Tipo": "Carro",
-        "Capacidad": "4 personas",
+        "Capacidad": 7,
         "Precio_Diario": "122.000"
     },
     {
@@ -85,7 +85,7 @@ db.automoviles.insertMany([
         "Modelo": "Renault 432",
         "Anio": 2010,
         "Tipo": "Carro",
-        "Capacidad": "5 personas",
+        "Capacidad": 5,
         "Precio_Diario": "600.000"
     },
     {
@@ -95,7 +95,7 @@ db.automoviles.insertMany([
         "Modelo": "Renault 543",
         "Anio": 2019,
         "Tipo": "Carro",
-        "Capacidad": "4 personas",
+        "Capacidad": 4,
         "Precio_Diario": "102.000"
     }
 ]);
@@ -137,12 +137,12 @@ db.reservas.insertMany([
     {
         _id: 1,
         "ID_Reserva": 1,
-        "cliente_id": 1,
+        "cliente_id": 2,
         "automovil_id": 1,
         "Fecha_Reserva": "11/08/2023",
         "Fecha_Inicio": "18/08/2023",
         "Fecha_Fin": "20/08/2023",
-        "Estado": "Reservado"
+        "Estado": "Pendiente"
     },
     {
         _id: 2,
@@ -152,7 +152,7 @@ db.reservas.insertMany([
         "Fecha_Reserva": "13/08/2023",
         "Fecha_Inicio": "19/08/2023",
         "Fecha_Fin": "22/08/2023",
-        "Estado": "Reservado"
+        "Estado": "Pendiente"
     },
     {
         _id: 3,
@@ -192,8 +192,8 @@ db.alquileres.insertMany([
         "ID_Alquiler": 1,
         "cliente_id": 1,
         "automovil_id": 1,
-        "Fecha_Inicio": "19/08/2023",
-        "Fecha_Fin": "21/08/2023",
+        "Fecha_Inicio": "2023-08-19",
+        "Fecha_Fin": "2023-08-21",
         "Costo_Total": "600.000",
         "Estado": "Alquilado" 
     },
@@ -201,39 +201,39 @@ db.alquileres.insertMany([
         _id: 2,
         "ID_Alquiler": 2,
         "cliente_id": 1,
-        "automovil_id": 1,
-        "Fecha_Inicio": "20/08/2023",
-        "Fecha_Fin": "22/08/2023",
+        "automovil_id": 2,
+        "Fecha_Inicio": "2023-08-20",
+        "Fecha_Fin": "2023-08-22",
         "Costo_Total": "400.000",
-        "Estado": "Alquilado" 
+        "Estado": "Disponible" 
     },
     {
         _id: 3,
         "ID_Alquiler": 3,
         "cliente_id": 1,
-        "automovil_id": 1,
-        "Fecha_Inicio": "21/08/2023",
-        "Fecha_Fin": "23/08/2023",
+        "automovil_id": 3,
+        "Fecha_Inicio": "2023-07-05",
+        "Fecha_Fin": "2023-08-21",
         "Costo_Total": "500.000",
-        "Estado": "Alquilado" 
+        "Estado": "Disponible" 
     },
     {
         _id: 4,
         "ID_Alquiler": 4,
-        "cliente_id": 1,
-        "automovil_id": 1,
-        "Fecha_Inicio": "22/08/2023",
-        "Fecha_Fin": "24/08/2023",
+        "cliente_id": 2,
+        "automovil_id": 4,
+        "Fecha_Inicio": "2023-08-22",
+        "Fecha_Fin": "2023-08-24",
         "Costo_Total": "800.000",
         "Estado": "Alquilado" 
     },
     {
         _id: 5,
         "ID_Alquiler": 5,
-        "cliente_id": 1,
-        "automovil_id": 1,
-        "Fecha_Inicio": "24/08/2023",
-        "Fecha_Fin": "27/08/2023",
+        "cliente_id": 4,
+        "automovil_id": 5,
+        "Fecha_Inicio": "2023-08-24",
+        "Fecha_Fin": "2023-08-27",
         "Costo_Total": "900.000",
         "Estado": "Alquilado" 
     }
@@ -402,7 +402,7 @@ db.empleados.insertMany([
         "DNI": 91514559,
         "Direccion": "Cr8 #12-12",
         "Telefono": 3127141832,
-        "Cargo": "Jefe de almacen"
+        "Cargo": "Vendedor"
     },
     {
         _id: 2,
@@ -412,7 +412,7 @@ db.empleados.insertMany([
         "DNI": 84392389,
         "Direccion": "Cr4 #20-40",
         "Telefono": 3124234876,
-        "Cargo": "Trainer"
+        "Cargo": "Vendedor"
     },
     {
         _id: 3,
@@ -442,7 +442,7 @@ db.empleados.insertMany([
         "DNI": 65423442,
         "Direccion": "Cr12 #12-12",
         "Telefono": 312314322,
-        "Cargo": "Aseo"
+        "Cargo": "Vendedor"
     }
 ]);
 
@@ -704,6 +704,157 @@ db.empleados.aggregate([
         $project: {
             _id: 0,
             "Registro_Entrega.alquiler_id": 0
+        }
+    }
+])
+
+/**Mostrar todos lo clientes registrados en la base de datos*/
+use("db_campus_alquiler");
+db.clientes.find();
+
+/**Obtener todos los automoviles disponibles para alquiler */
+use("db_campus_alquiler");
+db.automoviles.aggregate([
+    {
+        $lookup: {
+            from: "alquileres",
+            localField: "_id",
+            foreignField: "automovil_id",
+            as: "Alquiler"
+        }
+    },
+    {
+        $match: {
+            "Alquiler.Estado": "Disponible"
+        }
+    },
+    {
+        $project: {
+            "Alquiler._id": 0,
+            "Alquiler.cliente_id": 0,
+            "Alquiler.Fecha_Inicio": 0,
+            "Alquiler.Fecha_Fin": 0,
+            "Alquiler.Costo_Total": 0
+        }
+    }
+]);
+
+/**Listar todos los alquileres Alquilado junto con los datos de los
+clientes relacionados. */
+use("db_campus_alquiler");
+db.alquileres.aggregate([
+    {
+        $match: {
+            Estado: "Alquilado"
+        }
+    },
+    {
+        $lookup: {
+            from: "clientes",
+            localField: "cliente_id",
+            foreignField: "ID_Cliente",
+            as: "Cliente"
+        }
+    },
+    {
+        $project: {
+            _id: 0,
+            "automovil_id": 0,
+            "Cliente.Direccion": 0
+        }
+    }
+]);
+
+/**Mostrar todas las reservas pendientes con los datos del cliente
+y el automóvil reservado.  */
+use("db_campus_alquiler");
+db.reservas.aggregate([
+    {
+        $match: {
+            "Estado": "Pendiente"
+        }
+    },
+    {
+        $lookup: {
+            from: "clientes",
+            localField: "cliente_id",
+            foreignField: "ID_Cliente",
+            as: "Cliente"
+        }
+    },
+    {
+        $lookup: {
+            from: "automoviles",
+            localField: "automovil_id",
+            foreignField: "ID_Automovil",
+            as: "Automovil"
+        }
+    }
+]);
+
+/** Obtener los detalles del alquiler con el ID_Alquilerespecífico*/
+use("db_campus_alquiler");
+db.alquileres.find({ID_Alquiler: {$eq: 1}});
+
+/**Listar los empleados con el Cargo de "Vendedor". */
+use("db_campus_alquiler");
+db.empleados.find({Cargo: {$eq: "Vendedor"}});
+
+/**. Mostrar la cantidad total de automóviles disponibles en cada
+sucursal. */
+use("db_campus_alquiler");
+db.sucursal_automoviles.find({Cantidad_Disponible: {$exists: true}}, {_id: 0});
+
+/**Obtener el costo total de un alquiler específico. */
+use("db_campus_alquiler");
+db.alquileres.find({ID_Alquiler: {$eq: 2}},{_id: 0,ID_Alquiler: 1,Costo_Total: 1});
+
+/**Listar los clientes con el DNI específico */
+use("db_campus_alquiler");
+db.clientes.find({DNI: {$eq: 489213981}});
+
+/**Mostrar todos los automóviles con una capacidad mayor a 5 personas*/
+use("db_campus_alquiler");
+db.automoviles.find({Capacidad: {$gt: 5}});
+
+/**.Obtener los detalles del alquiler que tiene fecha de inicio en
+'2023-07-05'. */
+use("db_campus_alquiler");
+db.alquileres.find({Fecha_Inicio: {$eq: "2023-07-05"}});
+
+/**.Listar las reservas pendientes realizadas por un cliente
+específico. */
+use("db_campus_alquiler");
+db.clientes.aggregate([
+    {
+        $lookup: {
+            from: "reservas",
+            localField: "_id",
+            foreignField: "cliente_id",
+            as: "Reserva"
+        }
+    },
+    {
+        $project: {
+            "Reserva._id": 0,
+            "Reserva.automovil_id": 0,
+            "Reserva.Fecha_Reserva": 0
+        }
+    },
+    {
+        $project: {
+            "Reserva": {
+                $filter: {
+                    input: "$Reserva",
+                    as: "reserva",
+                    cond: { $ne: ["$$reserva.Estado", "Reservado"] }
+                }
+            }
+        }
+    },
+    {
+        $match: {
+            "Reserva.Estado": "Pendiente"
         }
     }
 ]);
