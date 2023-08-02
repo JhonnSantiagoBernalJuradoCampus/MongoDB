@@ -984,3 +984,8 @@ db.clientes.aggregate([
 /**20
  * Listar los alquileres con fecha de inicio entre '2023-07-05' y '2023-07-10'.
  */
+use("db_campus_alquiler");
+db.alquileres.find({$and: [
+    {Fecha_Inicio: {$gte: '2023-07-05'}},
+    {Fecha_Inicio: {$lte: '2023-07-10'}}
+]});
