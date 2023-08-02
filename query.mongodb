@@ -870,7 +870,10 @@ db.clientes.aggregate([
 /**13
  *  Mostrar los empleados con cargo de "Gerente" o "Asistente*/
 use("db_campus_alquiler")
-db.empleados.find({$or: [{Cargo: {$eq: "Gerente"}},{Cargo: {$eq: "Asistente"}}]});
+db.empleados.find({$or: [
+    {Cargo: {$eq: "Gerente"}},
+    {Cargo: {$eq: "Asistente"}}
+]});
 
 /**14
  * Obtener los datos de los clientes que realizaron al menos un alquiler. */
