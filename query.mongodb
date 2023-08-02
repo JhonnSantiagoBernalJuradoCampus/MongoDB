@@ -901,11 +901,7 @@ db.clientes.aggregate([
     },
     {
         $project: {
-            "Alquiler._id": 0,
-            "Alquiler.automovil_id": 0,
-            "Alquiler.Fecha_Inicio": 0,
-            "Alquiler.Fecha_Fin": 0,
-            "Alquiler.Costo_Total": 0
+            "Alquiler": 0
         }
     }
 ]);
