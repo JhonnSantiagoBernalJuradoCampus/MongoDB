@@ -272,45 +272,45 @@ db.createCollection("reservas", {
                     "bsonType": "int",
                     "minimum": 1,
                     "maximum": 100,
-                    "description": "Debe ser un numero entre 1 y 100"
+                    "description": "'_id' el _id es incorrecto"
                 },
                 "ID_Reserva": {
                     "bsonType": "int",
                     "minimum": 1,
                     "maximum": 100,
-                    "description": "Debe ser un numero entre 1 y 100"
+                    "description": "'ID_Reserva' el ID_Reserva es incorrecto"
                 },
                 "cliente_id": {
                     "bsonType": "int",
                     "minimum": 1,
                     "maximum": 100,
-                    "description": "Debe ser un numero entre 1 y 100"
+                    "description": "'cliente_id' el cliente_id es incorrecto"
                 },
                 "automovil_id": {
                     "bsonType": "int",
                     "minimum": 1,
                     "maximum": 100,
-                    "description": "Debe ser un numero entre 1 y 100"
+                    "description": "'automovil_id' el automovil_id es incorrecto"
                 },
                 "Fecha_Reserva": {
                     "bsonType": "string",
                     "minLength": 10,
-                    "description": "'_id' el _id es incorrecto"
+                    "description": "'Fecha_Reserva' el Fecha_Reserva es incorrecto"
                 },
                 "Fecha_Inicio": {
                     "bsonType": "string",
                     "minLength": 10,
-                    "description": "Debe ser una cadena con 10 caracteres"
+                    "description": "'Fecha_Inicio' el Fecha_Inicio es incorrecto"
                 },
                 "Fecha_Fin": {
                     "bsonType": "string",
                     "minLength": 10,
-                    "description": "Debe ser una cadena con 10 caracteres"
+                    "description": "'Fecha_Fin' el Fecha_Fin es incorrecto"
                 },
                 "Estado": {
                     "bsonType": "string",
                     "minLength": 6,
-                    "description": "Debe ser una cadena de minimo 6 caracteres"
+                    "description": "'Estado' el Estado es incorrecto"
                 }
             }
         }
@@ -478,13 +478,65 @@ db.alquileres.insertMany([
 ]);
 
 use("db_campus_alquiler");
-db.createCollection("clientes");
+db.createCollection("clientes", {
+    validator: {
+        $jsonSchema: {
+            "bsonType": "object",
+            "required": ["_id", "ID_Cliente", "Nombre", "Apellido", "DNI", "Direccion", "Telefono", "Email"],
+            "properties": {
+                "_id": {
+                    "bsonType": "int",
+                    "minimum": 1,
+                    "maximum": 100,
+                    "description": "'_id' el _id es incorrecto"
+                },
+                "ID_Cliente": {
+                    "bsonType": "int",
+                    "minimum": 1,
+                    "maximum": 100,
+                    "description": "'ID_Cliente' el ID_Cliente es incorrecto"
+                },
+                "Nombre": {
+                    "bsonType": "string",
+                    "maxLength": 30,
+                    "description": "'Nombre' el Nombre es incorrecto"
+                },
+                "Apellido": {
+                    "bsonType": "string",
+                    "maxLength": 30,
+                    "description": "'Apellido' el Apellido es incorrecto"
+                },
+                "DNI": {
+                    "bsonType": "int",
+                    "minLength": 8,
+                    "maxLength": 10,
+                    "description": "'DNI el DNI es incorrecto"
+                },
+                "Direccion": {
+                    "bsonType": "string",
+                    "maxLength": 30,
+                    "description": "'Direccion' la Direccion es incorrecta"
+                },
+                "Telefono": {
+                    "bsonType": "double",
+                    "minLength": 9,
+                    "maxLength": 11,
+                    "description": "'Telefono' el Telefono es incorrecto"
+                },
+                "Email": {
+                    "bsonType": "string",
+                    "description": "'Email' el Email es incorrecto"
+                }
+            }
+        }
+    }
+});
 db.clientes.insertMany([
     {
         _id: 1,
         "ID_Cliente": 1,
-        "Nombre": "Jhon Santiago",
-        "Apellido": "Bernal Jurado",
+        "Nombre": "Jhon",
+        "Apellido": "Bernal",
         "DNI": 109821901,
         "Direccion": "Cr 6 #90-12",
         "Telefono": 3123860654,
@@ -532,21 +584,58 @@ db.clientes.insertMany([
     }
 ]);
 
-
-db.createCollection("registro_devoluciones");
-db.createCollection("registro_entregas");
-db.createCollection("empleados");
-
-
-
-
-
-
-
-
-
-
-
+use("db_campus_alquiler");
+db.createCollection("registro_devoluciones", {
+    validator: {
+        $jsonSchema: {
+            "bsonType": "object",
+            "required": ["_id", "ID_Registro", "alquiler_id", "empleado_id", "Fecha_Devolucion", "Combustible_Devuelto", "Kilometraje_Devuelto", "Monto_Adicional"],
+            "properties": {
+                "_id": {
+                    "bsonType": "int",
+                    "minimum": 1,
+                    "maximum": 100,
+                    "description": "'_id' el _id es incorrecto"
+                },
+                "ID_Registro": {
+                    "bsonType": "int",
+                    "minimum": 1,
+                    "maximum": 100,
+                    "description": "'_id' el _id es incorrecto"
+                },
+                "alquiler_id": {
+                    "bsonType": "int",
+                    "minimum": 1,
+                    "maximum": 100,
+                    "description": "'_id' el _id es incorrecto"
+                },
+                "empleado_id": {
+                    "bsonType": "int",
+                    "minimum": 1,
+                    "maximum": 100,
+                    "description": "'_id' el _id es incorrecto"
+                },
+                "Fecha_Devolucion": {
+                    "bsonType": "string",
+                    "minLength": 10,
+                    "description": "'Fecha_Inicio' la Fecha_Inicio es incorrecto"
+                },
+                "Combustible_Devuelto": {
+                    "bsonType": "string",
+                    "description": "'Combustible_Devuelto' el Combustible_Devuelto es incorrecto"
+                },
+                "Kilometraje_Devuelto": {
+                    "bsonType": "int",
+                    "description": "'Kilometraje_Devuelto' el Kilometraje_Devuelto es incorrecto"
+                },
+                "Monto_Adicional": {
+                    "bsonType": "string",
+                    "description": "'Monto_Adicional' el Monto_Adicional es incorrecto"
+                }
+            }
+        }
+    }
+});
 db.registro_devoluciones.insertMany([
     {
         _id: 1,
@@ -600,6 +689,56 @@ db.registro_devoluciones.insertMany([
     }
 ]);
 
+use("db_campus_alquiler");
+db.createCollection("registro_entregas", {
+    validator: {
+        $jsonSchema: {
+            "bsonType": "object",
+            "required": ["_id", "ID_Registro","alquiler_id","empleado_id","Fecha_Entrega","Combustible_Entregado","Kilometraje_Entregado"],
+            "properties": {
+                "_id": {
+                    "bsonType": "int",
+                    "minimum": 1,
+                    "maximum": 100,
+                    "description": "'_id': el _id es incorrecto"
+                },
+                "ID_Registro": {
+                    "bsonType": "int",
+                    "minimum": 1,
+                    "maximum": 100,
+                    "description": "'ID_Registro': el ID_Registro es incorrecto"
+                },
+                "alquiler_id": {
+                    "bsonType": "int",
+                    "minimum": 1,
+                    "maximum": 100,
+                    "description": "'alquiler_id': el alquiler_id es incorrecto"
+                },
+                "empleado_id": {
+                    "bsonType": "int",
+                    "minimum": 1,
+                    "maximum": 100,
+                    "description": "'empleado_id': el empleado_id es incorrecto"
+                },
+                "Fecha_Entrega": {
+                    "bsonType": "string",
+                    "minLength": 10,
+                    "description": "'Fecha_Entrega' la Fecha_Entrega es incorrecto"
+                },
+                "Combustible_Entregado": {
+                    "bsonType": "string",
+                    "description": "'Combustible_Entregado' el Combustible_Entregado es incorrecto"
+                },
+                "Kilometraje_Entregado": {
+                    "bsonType": "int",
+                    "minLength": 1,
+                    "maxLength": 4,
+                    "description": "'Kilometraje_Entregado' el Kilometraje_Entregado es incorrecto"
+                }
+            }
+        }
+    }
+});
 db.registro_entregas.insertMany([
     {
         _id: 1,
@@ -647,6 +786,22 @@ db.registro_entregas.insertMany([
         "Kilometraje_Entregado": 500
     }
 ]);
+
+db.createCollection("empleados");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 db.empleados.insertMany([
     {
