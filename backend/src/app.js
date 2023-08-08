@@ -4,6 +4,8 @@ import alquilerRouter from "./routes/alquiler.js"
 import clienteRouter from "./routes/cliente.js";
 import automovilRouter from "./routes/automovil.js";
 import reservaRouter from "./routes/reserva.js";
+import empleadoRouter from "./routes/empleado.js";
+import sucursalAutomovilRouter from "./routes/sucursalAutomovil.js";
 
 dotenv.config();
 const app = express();
@@ -13,6 +15,8 @@ app.use("/alquiler", alquilerRouter);
 app.use("/cliente", clienteRouter);
 app.use("/automovil", automovilRouter);
 app.use("/reserva", reservaRouter);
+app.use("/empleado", empleadoRouter);
+app.use("/sucursal_automovil", sucursalAutomovilRouter);
 
 const config = JSON.parse(process.env.MY_CONFIG);
 app.listen(config, ()=>{

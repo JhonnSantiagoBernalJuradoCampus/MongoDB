@@ -41,4 +41,9 @@ router.get("/id/:id", async (req,res)=>{
     
 });
 
+router.get("/costo/:id", async (req,res)=>{
+    const costo = await alquiler.find({ID_Alquiler: {$eq: Math.floor(req.params.id)}},{ID_Alquiler: 1,Costo_Total: 1}).toArray();
+    res.send(costo);
+});
+
 export default router;
