@@ -1262,7 +1262,7 @@ db.reservas.aggregate([
 /**5
  *  Obtener los detalles del alquiler con el ID_Alquilerespecífico*/
 use("db_campus_alquiler");
-db.alquileres.find({ID_Alquiler: {$eq: 1}});
+db.alquileres.findOne({ID_Alquiler: {$eq: 1}});
 
 /**6
  * Listar los empleados con el Cargo de "Vendedor". */
