@@ -263,6 +263,9 @@ db.sucursal_automoviles.insertMany([
 
 use("db_campus_alquiler");
 db.createCollection("reservas", {
+    capped: true,
+    size: 2000,
+    max: 6,
     validator: {
         $jsonSchema: {
             "bsonType": "object",
@@ -371,6 +374,9 @@ db.reservas.insertMany([
 
 use("db_campus_alquiler");
 db.createCollection("alquileres", {
+    capped: true,
+    size: 2000,
+    max: 6,
     validator: {
         $jsonSchema: {
             "bsonType": "object",
@@ -479,6 +485,9 @@ db.alquileres.insertMany([
 
 use("db_campus_alquiler");
 db.createCollection("clientes", {
+    capped: true,
+    size: 2000,
+    max: 6,
     validator: {
         $jsonSchema: {
             "bsonType": "object",
@@ -518,7 +527,7 @@ db.createCollection("clientes", {
                     "description": "'Direccion' la Direccion es incorrecta"
                 },
                 "Telefono": {
-                    "bsonType": "double",
+                    "bsonType": "number",
                     "minLength": 9,
                     "maxLength": 11,
                     "description": "'Telefono' el Telefono es incorrecto"
@@ -586,6 +595,9 @@ db.clientes.insertMany([
 
 use("db_campus_alquiler");
 db.createCollection("registro_devoluciones", {
+    capped: true,
+    size: 2000,
+    max: 6,
     validator: {
         $jsonSchema: {
             "bsonType": "object",
@@ -691,6 +703,9 @@ db.registro_devoluciones.insertMany([
 
 use("db_campus_alquiler");
 db.createCollection("registro_entregas", {
+    capped: true,
+    size: 2000,
+    max: 6,
     validator: {
         $jsonSchema: {
             "bsonType": "object",
@@ -787,22 +802,64 @@ db.registro_entregas.insertMany([
     }
 ]);
 
-db.createCollection("empleados");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+use("db_campus_alquiler");
+db.createCollection("empleados", {
+    capped: true,
+    size: 2000,
+    max: 6,
+    validator: {
+        $jsonSchema: {
+            "bsonType": "object",
+            "required": ["_id","ID_Empleado","Nombre","Apellido","DNI","Direccion","Telefono","Cargo"],
+            "properties": {
+                "_id": {
+                    "bsonType": "int",
+                    "minimum": 1,
+                    "maximum": 100,
+                    "description": "'_id': el _id es incorrecto"
+                },
+                "ID_Empleado": {
+                    "bsonType": "int",
+                    "minimum": 1,
+                    "maximum": 100,
+                    "description": "'ID_Empleado': el ID_Empleado es incorrecto"
+                },
+                "Nombre": {
+                    "bsonType": "string",
+                    "maxLength": 30,
+                    "description": "'Nombre' el Nombre es incorrecto"
+                },
+                "Apellido": {
+                    "bsonType": "string",
+                    "maxLength": 30,
+                    "description": "'Apellido' el Apellido es incorrecto"
+                },
+                "DNI": {
+                    "bsonType": "int",
+                    "minLength": 7,
+                    "maxLength": 9,
+                    "description": "'DNI' el DNI es incorrecto"
+                },
+                "Direccion": {
+                    "bsonType": "string",
+                    "maxLength": 30,
+                    "description": "'Direccion' la Direccion es incorrecta"
+                },
+                "Telefono": {
+                    "bsonType": "number",
+                    "minLength": 9,
+                    "maxLength": 11,
+                    "description": "'Telefono' el Telefono es incorrecto"
+                },
+                "Cargo": {
+                    "bsonType": "string",
+                    "minLength": 6,
+                    "description": "'Cargo' el Cargo es incorrecto"
+                }
+            }
+        }
+    }
+});
 db.empleados.insertMany([
     {
         _id: 1,
