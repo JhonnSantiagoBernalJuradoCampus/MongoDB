@@ -1,0 +1,19 @@
+{
+  "name": "mongodb",
+  "version": "1.0.0",
+  "description": "\"Mongodb for Visual Studio Code\" es una extensión que permite a los desarrolladores interactuar con bases de datos MongoDB directamente desde Visual Studio Code. Esta extensión facilita la visualización y manipulación de datos, ejecución de comandos de MongoDB y ofrece sugerencias y autocompletado para facilitar el trabajo con la base de datos.",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --quiet backend/src/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "dotenv": "16.3.1",
+    "express": "4.18.2",
+    "mongodb": "5.7.0",
+    "nodemon": "3.0.1"
+  }
+}

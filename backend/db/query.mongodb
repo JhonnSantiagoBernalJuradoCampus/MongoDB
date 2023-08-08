@@ -1229,7 +1229,7 @@ db.alquileres.aggregate([
             "Cliente.Direccion": 0
         }
     }
-]);
+]); 
 
 /**4
  * Mostrar todas las reservas pendientes con los datos del cliente
