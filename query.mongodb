@@ -12,29 +12,29 @@ db.createCollection("sucursales", {
                     "bsonType": "int",
                     "minimum": 1,
                     "maximum": 100,
-                    "description": "Debe ser un numero del 1 a 100"
+                    "description": "'_id' el _id es incorrecto"
                 },
                 "ID_sucursal": {
                     "bsonType": "int",
                     "minimum": 1,
                     "maximum": 100,
-                    "description": "Debe ser un numero del 1 a 100"
+                    "description": "'ID_sucursal' el ID_sucursal es incorrecto"
                 },
                 "Nombre": {
                     "bsonType": "string",
                     "maxLength": 30,
-                    "description": "Debe ser una cadena de hasta 30 caracteres"
+                    "description": "'Nombre' el Nombre es incorrecto"
                 },
                 "Direccion": {
                     "bsonType": "string",
                     "maxLength": 100,
-                    "description": "Debe ser una cadena de hasta 100 caracteres"
+                    "description": "'Direccion' la Direccion es incorrecta"
                 },
                 "Telefono": {
                     "bsonType": "int",
                     "minLength": 8,
                     "maxLength": 9,
-                    "description": "Debe ser un numero de minimo 8 caracteres y maximo 9 caracteres"
+                    "description": "'Telefono' el Telefono es incorrecto"
                 }
             }
         }
@@ -92,45 +92,46 @@ db.createCollection("automoviles", {
                     "bsonType": "int",
                     "minimum": 1,
                     "maximum": 100,
-                    "description": "Debe ser un numero del 1 a 100"
+                    "description": "'_id' el _id es incorrecto"
                 },
                 "ID_Automovil": {
                     "bsonType": "int",
                     "minimum": 1,
                     "maximum": 100,
-                    "description": "Debe ser un numero del 1 a 100"
+                    "description": "'ID_Automovil' el ID_Automovil es incorrecto"
                 },
                 "Marca": {
                     "bsonType": "string",
                     "maxLength": 30,
-                    "description": "Debe ser una cadena de hasta 30 caracteres"
+                    "description": "'Marca' la Marca es incorrecta"
                 },
                 "Modelo": {
                     "bsonType": "string",
                     "maxLength": 30,
-                    "description": "Debe ser una cadena de hasta 30 caracteres"
+                    "description": "'Modelo' el Modelo es incorrecto"
                 },
                 "Anio": {
                     "bsonType": "int",
                     "minimum": 1980,
                     "maximum": 2025,
-                    "description": "Debe ser un numero entre 1980 y 2025"
+                    "description": "'Anio' el Anio es incorrecto"
                 },
                 "Tipo": {
                     "bsonType": "string",
-                    "maxLength": 30
+                    "maxLength": 30,
+                    "description": "'Tipo' el Tipo es incorrecto"
                 },
                 "Capacidad": {
                     "bsonType": "int",
                     "minimum": 1,
                     "maximum": 100,
-                    "description": "Debe ser un numero entre 1 y 100"
+                    "description": "'Capacidad' la Capacidad es incorrecta"
                 },
                 "Precio_Diario": {
                     "bsonType": "string",
                     "minLength": 1,
                     "maxLength": 7,
-                    "description": "Debe ser un numero entre 1 y 7 caracteres"
+                    "description": "'Precio_Diario' el Precio_Diario es incorrecto"
                 }
             }
         }
@@ -203,25 +204,25 @@ db.createCollection("sucursal_automoviles", {
                     "bsonType": "int",
                     "minimum": 1,
                     "maximum": 100,
-                    "description": "Debe ser un numero entre 1 y 100"
+                    "description": "'_id' el _id es incorrecto"
                 },
                 "sucursal_id": {
                     "bsonType": "int",
                     "minimum": 1,
                     "maximum": 100,
-                    "description": "Debe ser un numero entre 1 y 100"
+                    "description": "'sucursal_id' el sucursal_id es incorrecto"
                 },
                 "automovil_id": {
                     "bsonType": "int",
                     "minimum": 1,
                     "maximum": 100,
-                    "description": "Debe ser un numero entre 1 y 100"
+                    "description": "'automovil_id' el automovil_id es incorrecto"
                 },
                 "Cantidad_Disponible": {
                     "bsonType": "int",
                     "minimum": 1,
                     "maximum": 50,
-                    "description": "Debe ser un numero entre 1 y 50"
+                    "description": "'Cantidad_Disponible' la Cantidad_Disponible es incorrecto"
                 }
             }
         }
@@ -294,7 +295,7 @@ db.createCollection("reservas", {
                 "Fecha_Reserva": {
                     "bsonType": "string",
                     "minLength": 10,
-                    "description": "Debe ser una cadena con 10 caracteres"
+                    "description": "'_id' el _id es incorrecto"
                 },
                 "Fecha_Inicio": {
                     "bsonType": "string",
@@ -379,45 +380,45 @@ db.createCollection("alquileres", {
                     "bsonType": "int",
                     "minimum": 1,
                     "maximum": 100,
-                    "description": "Debe ser un numero del 1 al 100"
+                    "description": "'_id' el _id es incorrecto"
                 },
                 "ID_Alquiler": {
                     "bsonType": "int",
                     "minimum": 1,
                     "maximum": 100,
-                    "description": "Debe ser un numero del 1 al 100"
+                    "description": "'ID_Alquiler' el ID_Alquiler es incorrecto"
                 },
                 "cliente_id": {
                     "bsonType": "int",
                     "minimum": 1,
                     "maximum": 100,
-                    "description": "Debe ser un numero del 1 al 100"
+                    "description": "'cliente_id' el cliente_id es incorrecto"
                 },
                 "automovil_id": {
                     "bsonType": "int",
                     "minimum": 1,
                     "maximum": 100,
-                    "description": "Debe ser un numero del 1 al 100"
+                    "description": "'automovil_id' el automovil_id es incorrecto"
                 },
                 "Fecha_Inicio": {
                     "bsonType": "string",
                     "minLength": 10,
-                    "description": "Debe ser una cadena con 10 caracteres"
+                    "description": "'Fecha_Inicio' la Fecha_Inicio es incorrecto"
                 },
                 "Fecha_Fin": {
                     "bsonType": "string",
                     "minLength": 10,
-                    "description": "Debe ser una cadena con 10 caracteres"
+                    "description": "'Fecha_Fin' la Fecha_Fin es incorrecto"
                 },
                 "Costo_Total": {
                     "bsonType": "string",
                     "minLength": 6,
-                    "description": "Debe ser una cadena de minimo 6 caracteres"
+                    "description": "'Costo_Total' el Costo_Total es incorrecto"
                 },
                 "Estado": {
                     "bsonType": "string",
                     "minLength": 8,
-                    "description": "Debe ser una cadena de minimo 8 caracteres"
+                    "description": "'Estado' el Estado es incorrecto"
                 }
             }
         }
