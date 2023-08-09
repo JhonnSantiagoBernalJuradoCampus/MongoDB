@@ -35,4 +35,35 @@ router.get("/disponible", async (req,res)=>{
     }
 });
 
+router.get("/capacidad", async (req,res)=>{
+    try {
+        const db = await connectionDB();
+        const automovil = db.collection("automoviles");
+        
+        const mayor = await automovil.find({Capacidad: {$gt: 5}}).toArray();
+        res.send(mayor);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error en el servidor");
+    }
+});
+
+router.get("/ordenado", async (req,res)=>{
+    try {
+        const db = await connectionDB();
+        const automovil = db.collection("automoviles");
+
+        const ordenado = await automovil.aggregate([{
+            $sort: {
+                "Marca":1,
+                "Modelo": 1 
+            }
+        }]).toArray();
+        res.send(ordenado)
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error en el servidor");
+    }
+});
+
 export default router;

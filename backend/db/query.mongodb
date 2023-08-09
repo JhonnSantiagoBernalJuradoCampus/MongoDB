@@ -1336,7 +1336,8 @@ db.clientes.aggregate([
     },
     {
         $match: {
-            "Reserva.Estado": "Pendiente"
+            "Reserva.Estado": "Pendiente",
+            "_id": 1
         }
     }
 ]);
@@ -1405,7 +1406,7 @@ db.sucursales.aggregate([
 /**17
  * Obtener la cantidad total de alquileres registrados en la base de datos*/
 use("db_campus_alquiler");
-db.alquileres.find().count();
+db.alquileres.countDocuments();
 
 /**18
  * Mostrar los automóviles con capacidad igual a 5 personas y que 

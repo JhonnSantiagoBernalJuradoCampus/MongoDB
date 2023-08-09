@@ -64,7 +64,33 @@ router.get("/costo/:id", async (req,res)=>{
         .find({ID_Alquiler: Math.floor(req.params.id)})
         .project({ID_Alquiler: 1,Costo_Total: 1, _id: 0})
         .toArray();
-        res.send(costo);
+        (costo[0] === undefined)? res.status(404).send({message: "Dato no encontrando"}) : res.send(costo);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error en el servidor");
+    }
+});
+
+router.get("/fecha", async (req,res)=>{
+    try {
+        const db = await connectionDB();
+        const alquiler = db.collection("alquileres");
+        
+        const fecha = await alquiler.find({Fecha_Inicio: {$eq: "2023-07-05"}}).toArray();
+        res.send(fecha)
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error en el servidor");
+    }
+});
+
+router.get("/cantidad", async (req,res)=>{
+    try {
+        const db = await connectionDB();
+        const alquiler = db.collection("alquileres");
+
+        const cantidad = await alquiler.countDocuments();
+        res.send({cantidad: cantidad});
     } catch (error) {
         console.error(error);
         res.status(500).send("Error en el servidor");
