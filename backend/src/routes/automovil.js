@@ -66,4 +66,32 @@ router.get("/ordenado", async (req,res)=>{
     }
 });
 
+router.get("/mayor", async (req,res)=>{
+    try {
+        const db = await connectionDB();
+        const automovil = db.collection("automoviles");
+
+        const mayor = await automovil.aggregate([
+            {
+                $lookup: {
+                    from: "alquileres",
+                    localField: "_id",
+                    foreignField: "automovil_id",
+                    as: "Alquiler"
+                }
+            },
+            {
+                $match: {
+                    "Capacidad": 5,
+                    "Alquiler.Estado": "Disponible"
+                }
+            }
+        ]).toArray();
+        (mayor[0] === undefined) ? res.status(404).send({message: "No hay datos que coincidan"}) : res.send(mayor);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error en el servidor");
+    }
+});
+
 export default router;

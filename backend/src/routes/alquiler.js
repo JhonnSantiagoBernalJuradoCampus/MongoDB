@@ -97,4 +97,20 @@ router.get("/cantidad", async (req,res)=>{
     }
 });
 
+router.get("/entre", async (req,res)=>{
+    try {
+        const db = await connectionDB();
+        const alquiler = db.collection("alquileres");
+
+        const fecha = await alquiler.find({$and: [
+            {Fecha_Inicio: {$gte: '2023-07-05'}},
+            {Fecha_Inicio: {$lte: '2023-07-10'}}
+        ]}).toArray();
+        res.send(fecha);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error en el servidor");
+    }
+})
+
 export default router;

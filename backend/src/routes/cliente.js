@@ -114,4 +114,37 @@ router.get("/alquiler", async (req,res)=>{
     }
 })
 
+router.get("/id/:id", async (req,res)=>{
+    try {
+        const db = await connectionDB();
+        const cliente = db.collection("clientes");
+
+        const usuario = await cliente.aggregate([
+            {
+                $lookup: {
+                    from: "reservas",
+                    localField: "_id",
+                    foreignField: "cliente_id",
+                    as: "Reservas"
+                }
+            },
+            {
+                $match: {
+                    "Reservas": {$ne: []},
+                    "Reservas.ID_Reserva": Math.floor(req.params.id)
+                }
+            },
+            {
+                $project: {
+                    "Reservas": 0
+                }
+            }
+        ]).toArray();
+        (usuario[0] === undefined) ? res.status(404).send({message: "Dato no encontrado"}) : res.send(usuario);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error en el servidor")
+    }
+})
+
 export default router;
