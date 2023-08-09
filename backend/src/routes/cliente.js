@@ -1,12 +1,18 @@
 import { Router } from "express";
-import con from "../../db/conexion.js";
+import { connectionDB } from "../../db/conexion.js";
 
 const router = Router();
-const db = await con();
-let cliente = db.collection("clientes");
 
 router.get("/", async (req,res)=>{
-    let clientes = await cliente.find().toArray();
-    res.send(clientes);
+    try {
+        const db = await connectionDB();
+        let cliente = db.collection("clientes");
+
+        let clientes = await cliente.find().toArray();
+        res.send(clientes);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error en el servidor");
+    }
 })
 export default router;

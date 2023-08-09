@@ -1,32 +1,38 @@
 import { Router } from "express";
-import con from "../../db/conexion.js";
+import {connectionDB} from "../../db/conexion.js";
 
 const router = Router();
-const db = await con();
-const automovil = db.collection("automoviles");
 
 router.get("/disponible", async (req,res)=>{
-    const automoviles = await automovil.aggregate([
-        {
-            $lookup: {
-                from: "alquileres",
-                localField: "_id",
-                foreignField: "automovil_id",
-                as: "Alquiler"
+    try {
+        const db = await connectionDB();
+        const automovil = db.collection("automoviles");
+
+        const automoviles = await automovil.aggregate([
+            {
+                $lookup: {
+                    from: "alquileres",
+                    localField: "_id",
+                    foreignField: "automovil_id",
+                    as: "Alquiler"
+                }
+            },
+            {
+                $match: {
+                    "Alquiler.Estado": "Disponible"
+                }
+            },
+            {
+                $project: {
+                    "Alquiler": 0
+                }
             }
-        },
-        {
-            $match: {
-                "Alquiler.Estado": "Disponible"
-            }
-        },
-        {
-            $project: {
-                "Alquiler": 0
-            }
-        }
-    ]).toArray();
-    res.send(automoviles);
+        ]).toArray();
+        res.send(automoviles);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error en el servidor");
+    }
 });
 
 export default router;

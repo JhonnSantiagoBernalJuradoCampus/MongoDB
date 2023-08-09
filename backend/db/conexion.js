@@ -2,7 +2,7 @@ import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 dotenv.config();
 
-async function connectionDB (){
+export async function connectionDB (){
     try {
         const uri = `mongodb+srv://${process.env.ATLAS_USER}:${process.env.ATLAS_PASSWORD}@ejemplocluster.p78ttxa.mongodb.net/${process.env.ATLAS_DB}`
         const opt = {
@@ -16,4 +16,3 @@ async function connectionDB (){
         return {status: 500, message: error};
     };
 }
-export default connectionDB;

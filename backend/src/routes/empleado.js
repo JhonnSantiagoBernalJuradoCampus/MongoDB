@@ -1,13 +1,19 @@
 import { Router } from "express";
-import con from "../../db/conexion.js";
+import { connectionDB } from "../../db/conexion.js";
 
 const router = Router();
-const db = await con();
-const empleado = db.collection("empleados");
 
 router.get("/vendedor", async (req,res)=>{
-    const empleados = await empleado.find({Cargo: {$eq: "Vendedor"}}).toArray();
-    res.send(empleados);
+    try {
+        const db = await connectionDB();
+        const empleado = db.collection("empleados");
+
+        const empleados = await empleado.find({Cargo: {$eq: "Vendedor"}}).toArray();
+        res.send(empleados);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error en el servidor");
+    }
 });
 
 export default router;
