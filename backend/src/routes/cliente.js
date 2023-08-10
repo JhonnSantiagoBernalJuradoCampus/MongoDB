@@ -114,7 +114,7 @@ router.get("/alquiler", async (req,res)=>{
     }
 })
 
-router.get("/id/:id", async (req,res)=>{
+router.get("/reserva/:id", async (req,res)=>{
     try {
         const db = await connectionDB();
         const cliente = db.collection("clientes");

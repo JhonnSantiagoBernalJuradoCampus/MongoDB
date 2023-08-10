@@ -35,7 +35,7 @@ router.get("/disponible", async (req,res)=>{
     }
 });
 
-router.get("/capacidad", async (req,res)=>{
+router.get("/mayor", async (req,res)=>{
     try {
         const db = await connectionDB();
         const automovil = db.collection("automoviles");
@@ -66,7 +66,7 @@ router.get("/ordenado", async (req,res)=>{
     }
 });
 
-router.get("/mayor", async (req,res)=>{
+router.get("/capacidad", async (req,res)=>{
     try {
         const db = await connectionDB();
         const automovil = db.collection("automoviles");
