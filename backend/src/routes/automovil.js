@@ -1,9 +1,11 @@
 import { Router } from "express";
 import {connectionDB} from "../../db/conexion.js";
+import { limit } from "../middleware/limit.js";
 
 const router = Router();
 
-router.get("/disponible", async (req,res)=>{
+router.get("/disponible", limit(), async (req,res)=>{
+    if(!req.rateLimit) return;
     try {
         const db = await connectionDB();
         const automovil = db.collection("automoviles");
@@ -35,7 +37,8 @@ router.get("/disponible", async (req,res)=>{
     }
 });
 
-router.get("/mayor", async (req,res)=>{
+router.get("/mayor", limit(), async (req,res)=>{
+    if(!req.rateLimit) return;
     try {
         const db = await connectionDB();
         const automovil = db.collection("automoviles");
@@ -48,7 +51,8 @@ router.get("/mayor", async (req,res)=>{
     }
 });
 
-router.get("/ordenado", async (req,res)=>{
+router.get("/ordenado", limit() ,async (req,res)=>{
+    if(!req.rateLimit) return;
     try {
         const db = await connectionDB();
         const automovil = db.collection("automoviles");
@@ -66,7 +70,8 @@ router.get("/ordenado", async (req,res)=>{
     }
 });
 
-router.get("/capacidad", async (req,res)=>{
+router.get("/capacidad", limit(), async (req,res)=>{
+    if(!req.rateLimit) return;
     try {
         const db = await connectionDB();
         const automovil = db.collection("automoviles");

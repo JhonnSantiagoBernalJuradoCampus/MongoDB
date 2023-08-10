@@ -1,9 +1,11 @@
 import { Router } from "express";
 import { connectionDB } from "../../db/conexion.js";
+import { limit } from "../middleware/limit.js";
 
 const router = Router();
 
-router.get("/", async (req,res)=>{
+router.get("/", limit(), async (req,res)=>{
+    if(!req.rateLimit) return;
     try {
         const db = await connectionDB();
         let cliente = db.collection("clientes");
@@ -16,7 +18,7 @@ router.get("/", async (req,res)=>{
     }
 });
 
-router.get("/dni/:dni", async (req,res)=>{
+router.get("/dni/:dni", limit(),async (req,res)=>{
     /**
      * @var req.params.dni
      * req.params.dni = 489213981
@@ -32,11 +34,12 @@ router.get("/dni/:dni", async (req,res)=>{
     }
 });
 
-router.get("/pendiente/:id", async (req,res)=>{
+router.get("/pendiente/:id", limit(), async (req,res)=>{
     /**
      * @var req.params.id
      *  req.params.id debe ser un numero
      */
+    if(!req.rateLimit) return;
     try {
         const db = await connectionDB();
         const cliente = db.collection("clientes");
@@ -82,7 +85,8 @@ router.get("/pendiente/:id", async (req,res)=>{
     }
 });
 
-router.get("/alquiler", async (req,res)=>{
+router.get("/alquiler", limit(), async (req,res)=>{
+    if(!req.rateLimit) return;
     try {
         const db = await connectionDB();
         const cliente = db.collection("clientes");
@@ -114,7 +118,8 @@ router.get("/alquiler", async (req,res)=>{
     }
 })
 
-router.get("/reserva/:id", async (req,res)=>{
+router.get("/reserva/:id", limit(), async (req,res)=>{
+    if(!req.rateLimit) return;
     try {
         const db = await connectionDB();
         const cliente = db.collection("clientes");

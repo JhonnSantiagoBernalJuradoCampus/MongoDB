@@ -1,9 +1,11 @@
 import { Router } from "express";
 import { connectionDB } from "../../db/conexion.js";
+import { limit } from "../middleware/limit.js";
 
 const router = Router();
 
-router.get("/automovil", async (req,res)=>{
+router.get("/automovil", limit(), async (req,res)=>{
+    if(!req.rateLimit) return;
     try {
         const db = await connectionDB();
         const sucursal = db.collection("sucursales");

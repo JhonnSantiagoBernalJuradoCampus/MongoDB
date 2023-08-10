@@ -1,9 +1,10 @@
 import { Router } from "express";
 import { connectionDB } from "../../db/conexion.js";
+import { limit } from "../middleware/limit.js";
 
 const router = Router();
 
-router.get("/vendedor", async (req,res)=>{
+router.get("/vendedor", limit(),async (req,res)=>{
     try {
         const db = await connectionDB();
         const empleado = db.collection("empleados");
@@ -16,7 +17,7 @@ router.get("/vendedor", async (req,res)=>{
     }
 });
 
-router.get("/cargo", async (req,res)=>{
+router.get("/cargo", limit(),async (req,res)=>{
     try {
         const db = await connectionDB();
         const empleado = db.collection("empleados");

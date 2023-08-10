@@ -1,9 +1,11 @@
 import { Router } from "express";
 import {connectionDB} from "../../db/conexion.js";
+import { limit } from "../middleware/limit.js";
 
 const router = Router();
 
-router.get("/alquilado", async (req,res)=>{
+router.get("/alquilado", limit(), async (req,res)=>{
+    if(!req.rateLimit) return;
     try {
         const db = await connectionDB();
         const alquiler = db.collection("alquileres");
@@ -37,11 +39,12 @@ router.get("/alquilado", async (req,res)=>{
     }
 });
 
-router.get("/id/:id", async (req,res)=>{
+router.get("/id/:id", limit() ,async (req,res)=>{
     /**
      * @var req.params.id
      * El id debe ser un numero
      */
+    if(!req.rateLimit) return;
     try {
         const db = await connectionDB();
         const alquiler = db.collection("alquileres");
@@ -55,7 +58,8 @@ router.get("/id/:id", async (req,res)=>{
 
 });
 
-router.get("/costo/:id", async (req,res)=>{
+router.get("/costo/:id", limit(),async (req,res)=>{
+    if(!req.rateLimit) return;
     try {
         const db = await connectionDB();
         const alquiler = db.collection("alquileres");
@@ -71,7 +75,8 @@ router.get("/costo/:id", async (req,res)=>{
     }
 });
 
-router.get("/fecha", async (req,res)=>{
+router.get("/fecha", limit(),async (req,res)=>{
+    if(!req.rateLimit) return;
     try {
         const db = await connectionDB();
         const alquiler = db.collection("alquileres");
@@ -84,7 +89,8 @@ router.get("/fecha", async (req,res)=>{
     }
 });
 
-router.get("/cantidad", async (req,res)=>{
+router.get("/cantidad", limit(), async (req,res)=>{
+    if(!req.rateLimit) return;
     try {
         const db = await connectionDB();
         const alquiler = db.collection("alquileres");
@@ -97,7 +103,8 @@ router.get("/cantidad", async (req,res)=>{
     }
 });
 
-router.get("/entre", async (req,res)=>{
+router.get("/entre", limit(), async (req,res)=>{
+    if(!req.rateLimit) return;
     try {
         const db = await connectionDB();
         const alquiler = db.collection("alquileres");
