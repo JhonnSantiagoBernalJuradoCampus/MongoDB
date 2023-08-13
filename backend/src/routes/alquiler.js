@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {connectionDB} from "../../db/conexion.js";
 import { limit } from "../middleware/limit.js";
+import { ReturnDocument } from "mongodb";
 
 const router = Router();
 
@@ -35,7 +36,7 @@ router.get("/alquilado", limit(), async (req,res)=>{
         res.send(alquileres);
     } catch (error) {
         console.error(error);
-        res.status(500).send("Error en el servidor");
+        res.status(500).send({message: "Error en el servidor"});
     }
 });
 
@@ -53,7 +54,7 @@ router.get("/id/:id", limit() ,async (req,res)=>{
         (alquileres !== null) ? res.send(alquileres) : res.status(404).send({message: "Dato no encontrado"});    
     } catch (error) {
         console.error(error);
-        res.status(500).send("Error en el servidor");
+        res.status(500).send({message: "Error en el servidor"});
     }
 
 });
@@ -71,7 +72,7 @@ router.get("/costo/:id", limit(),async (req,res)=>{
         (costo[0] === undefined)? res.status(404).send({message: "Dato no encontrando"}) : res.send(costo);
     } catch (error) {
         console.error(error);
-        res.status(500).send("Error en el servidor");
+        res.status(500).send({message: "Error en el servidor"});
     }
 });
 
@@ -85,7 +86,7 @@ router.get("/fecha", limit(),async (req,res)=>{
         res.send(fecha)
     } catch (error) {
         console.error(error);
-        res.status(500).send("Error en el servidor");
+        res.status(500).send({message: "Error en el servidor"});
     }
 });
 
@@ -99,7 +100,7 @@ router.get("/cantidad", limit(), async (req,res)=>{
         res.send({cantidad: cantidad});
     } catch (error) {
         console.error(error);
-        res.status(500).send("Error en el servidor");
+        res.status(500).send({message: "Error en el servidor"});
     }
 });
 
@@ -116,8 +117,110 @@ router.get("/entre", limit(), async (req,res)=>{
         res.send(fecha);
     } catch (error) {
         console.error(error);
-        res.status(500).send("Error en el servidor");
+        res.status(500).send({message: "Error en el servidor"});
     }
 })
+
+//Crud
+router.get("/", limit(), async (req,res)=>{
+    if(!req.rateLimit) return;
+    try {
+        const db = await connectionDB();
+        const alquiler = db.collection("alquileres");
+
+        const result = await alquiler.find();
+        res.send(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({message: "Error en el servidor"});
+    }
+});
+router.post("/", limit(), async (req,res)=>{
+    /**
+     * @var {req.body}
+     * req.body = {
+     *  "_id": 6,
+        "ID_Alquiler": 3,
+        "cliente_id": 2,
+        "automovil_id": 4,
+        "Fecha_Inicio": "2023-08-19",
+        "Fecha_Fin": "2023-08-21",
+        "Costo_Total": "600.000",
+        "Estado": "Alquilado" }
+     */
+    if(!req.rateLimit) return;
+    try {
+        const db = await connectionDB();
+        const alquiler = db.collection("alquileres");
+
+        await alquiler.insertOne({
+            "_id": 6,
+            "ID_Alquiler": 3,
+            "cliente_id": 2,
+            "automovil_id": 4,
+            "Fecha_Inicio": "2023-08-19",
+            "Fecha_Fin": "2023-08-21",
+            "Costo_Total": "600.000",
+            "Estado": "Alquilado"
+        });
+        res.status(201).send({message: "Agregado con exito"})
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({message: "Error en el servidor"});
+    }
+});
+router.put("/:id", limit(), async (req,res)=>{
+    /**
+     * @var {req.body, req.params.id}
+     *  req.body = {
+            "Costo_Total": "600.000",
+            "Estado": "Alquilado"
+        }
+        req.params.id = {
+            4
+        }
+     */
+    if(!req.rateLimit) return;
+    try {
+        const db = await connectionDB();
+        const alquiler = db.collection("alquileres");
+
+        const id = req.params.id
+        const {Costo_Total, Estado} = req.body;
+        if (Costo_Total === undefined || Estado === undefined) throw {status: 406, message: "Los campos Costo_Total y Estado son obligatorios"}
+        const nuevo = await alquiler.updateOne({_id: Math.floor(id)}, {$set: {
+            "Costo_Total": Costo_Total,
+            "Estado": Estado
+        }});
+        (nuevo.matchedCount === 0)
+        ? res.status(404).send({message: "id no encontrado"})
+        : res.status(202).send({message: "Actualizado con exito"});
+    } catch (error) {
+        (error.status)
+        ? res.status(error.status).send({message: error.message})
+        : (error.errInfo)
+        ? res.status(417).send({message: error.errInfo.details.schemaRulesNotSatisfied[0].propertiesNotSatisfied[0].description})
+        : res.status(500).send({message: "Error en el servidor"})
+    }
+});
+router.delete("/:id", limit(), async (req,res)=>{
+    /**
+     * @var {req.params.id}
+     * req.params.id = 4
+     */
+    if(!req.rateLimit) return;
+    try {
+        const db = await connectionDB();
+        const alquiler = db.collection("alquileres");
+
+        const deleted = await alquiler.deleteOne({_id: Math.floor(req.params.id)});
+        (deleted.deletedCount === 0)
+        ? res.status(404).send({message: "Dato no encontrado"})
+        : res.status(202).send({message: "Eliminado con exito"})
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({message: "Error en el servidor"});
+    }
+});
 
 export default router;
