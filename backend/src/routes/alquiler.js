@@ -139,7 +139,7 @@ router.post("/", limit(), async (req,res)=>{
     /**
      * @var {req.body}
      * req.body = {
-     *  "_id": 6,
+        "_id": 6,
         "ID_Alquiler": 3,
         "cliente_id": 2,
         "automovil_id": 4,
