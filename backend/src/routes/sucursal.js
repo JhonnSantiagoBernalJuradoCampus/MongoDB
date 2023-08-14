@@ -66,13 +66,16 @@ router.post("/", limit(), async (req,res)=>{
         const nuevo = await sucursal.insertOne(req.body);
         res.status(201).send({message: "Creado correctamente"})
     } catch (error) {
-        const err = error.errInfo.details.schemaRulesNotSatisfied[0];
-        (err.missingProperties)
-        ? res.status(417).send({message: `El campo ${err.missingProperties[0]} es obligatorio`})
-        : (err.propertiesNotSatisfied)
-        ? res.status(417).send({message: err.propertiesNotSatisfied[0].description})
-        : res.status(500).send({message: error})
+        if(error.keyValue) res.status(406).send({message: `La sucursal con _id: ${error.keyValue._id} ya existe`})
+        else{
+            const err = error.errInfo.details.schemaRulesNotSatisfied[0];
+            (err.missingProperties)
+            ? res.status(417).send({message: `El campo ${err.missingProperties[0]} es obligatorio`})
+            : (err.propertiesNotSatisfied)
+            ? res.status(417).send({message: err.propertiesNotSatisfied[0].description})
+            : res.status(500).send({message: error})
+        }
     }
-})
+});
 
 export default router;
