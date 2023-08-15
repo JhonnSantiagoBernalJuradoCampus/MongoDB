@@ -77,5 +77,56 @@ router.post("/", limit(), async (req,res)=>{
         }
     }
 });
+router.put("/:id", limit(), async (req,res)=>{
+    /**
+     * @var {req.body, req.params.id}
+        req.body = {
+            "Nombre": "La colina",
+            "Direccion": "United states",
+            "Telefono": 123124124
+        }
+        req.params.id = 4
+     */
+    if(!req.rateLimit) return;
+    try {
+        const db = await connectionDB();
+        const sucursal = db.collection("sucursales")
+        
+        const { Nombre, Direccion, Telefono} = req.body
+
+        const put = await sucursal.updateOne({_id: Math.floor(req.params.id)}, {$set: {
+            "Nombre": Nombre,
+            "Direccion": Direccion,
+            "Telefono": Telefono
+        }});
+        if(put.modifiedCount === 0) throw {status: 417, message: "id no encontrado"}
+        res.send({message: "Actualizado con exito"})
+    } catch (error) {
+        console.error(error);
+        (error.status)
+        ? res.status(error.status).send({message: error.message})
+        : res.status(500).send({message: "Error en el servidor"});
+    }
+});
+router.delete("/:id", limit(), async (req,res)=>{
+    /**
+     * @var {req.params.id}
+     * req.params.id = 5
+     */
+    if(!req.rateLimit) return;
+    try {
+        const db = await connectionDB();
+        const sucursal = db.collection("sucursales");
+
+        const deleted = await sucursal.deleteOne({_id: Math.floor(req.params.id)});
+        if(deleted.deletedCount === 0) throw {status: 404, message: "dato no encontrado"}
+        res.send({message: "Eliminado con exito"});
+    } catch (error) {
+        console.error(error);
+        (error.status)
+        ? res.status(error.status).send({message: error.message})
+        : res.status(500).send({message: "Error en el servidor"});
+    }
+});
 
 export default router;
