@@ -1,11 +1,10 @@
 import { Router } from "express";
 import {connectionDB} from "../../db/conexion.js";
 import { limit } from "../middleware/limit.js";
-import { ReturnDocument } from "mongodb";
-
+import { middlewareVerify } from "../middleware/proxyAlquiler.js";
 const router = Router();
 
-router.get("/alquilado", limit(), async (req,res)=>{
+router.get("/alquilado",limit(), middlewareVerify, async (req,res)=>{
     if(!req.rateLimit) return;
     try {
         const db = await connectionDB();

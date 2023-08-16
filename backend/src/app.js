@@ -7,12 +7,16 @@ import reservaRouter from "./routes/reserva.js";
 import empleadoRouter from "./routes/empleado.js";
 import sucursalAutomovilRouter from "./routes/sucursalAutomovil.js";
 import sucursalRouter from "./routes/sucursal.js";
+import { appToken, appVerify } from "./middleware/token.js";
 
 dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use("/alquiler", alquilerRouter);
+
+app.use("/token", appToken);
+
+app.use("/alquiler", appVerify, alquilerRouter);
 app.use("/cliente", clienteRouter);
 app.use("/automovil", automovilRouter);
 app.use("/reserva", reservaRouter);
