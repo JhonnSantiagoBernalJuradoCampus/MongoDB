@@ -24,16 +24,377 @@ Ejercicio de alquileres para practicar mongo, se creo la base de datos según es
 ## Get
 ### Endpoints
 1. `/cliente` Mostrar todos lo clientes registrados en la base de datos.
+    <details>
+    <summary>Ejemplo de datos de salida</summary>    
+
+    ```json
+    [
+        {
+            "_id": 1,
+            "ID_Cliente": 1,
+            "Nombre": "Jhon",
+            "Apellido": "Bernal",
+            "DNI": 109821901,
+            "Direccion": "Cr 6 #90-12",
+            "Telefono": 3123860654,
+            "Email": "jbernalsantiago@gmail.com"
+        },
+        {
+            "_id": 2,
+            "ID_Cliente": 2,
+            "Nombre": "Daniel",
+            "Apellido": "Hernandez",
+            "DNI": 489213981,
+            "Direccion": "Cr 4 #20-10",
+            "Telefono": 3123342422,
+            "Email": "danielhernandez@gmail.com"
+        },
+        {
+            "_id": 3,
+            "ID_Cliente": 3,
+            "Nombre": "Diego",
+            "Apellido": "Quintero",
+            "DNI": 109532412,
+            "Direccion": "Cr 3 #30-2",
+            "Telefono": 3118124324,
+            "Email": "diegoquintero@gmail.com"
+        },
+        {
+            "_id": 4,
+            "ID_Cliente": 4,
+            "Nombre": "Angie",
+            "Apellido": "Cala",
+            "DNI": 100532853,
+            "Direccion": "Cr 1 #50-40",
+            "Telefono": 3118128028,
+            "Email": "angiecala@gmail.com"
+        },
+        {
+            "_id": 5,
+            "ID_Cliente": 5,
+            "Nombre": "Angela",
+            "Apellido": "Esperanza",
+            "DNI": 63542975,
+            "Direccion": "Cr 20 #10-10",
+            "Telefono": 3166010786,
+            "Email": "angelaesperanza@gmail.com"
+        }
+    ]
+    ```
+
+    </details>
 2. `/automovil/disponible` Obtener todos los automoviles disponibles para alquiler.
+    <details>
+    <summary>Ejemplo de datos de salida</summary>
+
+    ```json
+    [
+        {
+            "_id": 2,
+            "ID_Automovil": 2,
+            "Marca": "Renault",
+            "Modelo": "Renault 123",
+            "Anio": 2020,
+            "Tipo": "Carro",
+            "Capacidad": 6,
+            "Precio_Diario": "300.000"
+        },
+        {
+            "_id": 3,
+            "ID_Automovil": 3,
+            "Marca": "Renault",
+            "Modelo": "Renault 321",
+            "Anio": 2021,
+            "Tipo": "Carro",
+            "Capacidad": 7,
+            "Precio_Diario": "122.000"
+        },
+        {
+            "_id": 5,
+            "ID_Automovil": 5,
+            "Marca": "Renault",
+            "Modelo": "Renault 543",
+            "Anio": 2019,
+            "Tipo": "Carro",
+            "Capacidad": 4,
+            "Precio_Diario": "102.000"
+        }
+    ]
+    ```
+    </details>
 3. `/alquiler/alquilado` Listar todos los alquileres Alquilado junto con los datos de los clientes relacionados.
+    <details>
+    <summary>Ejemplo de datos de salida</summary>
+
+    ```json
+    [
+        {
+            "ID_Alquiler": 1,
+            "cliente_id": 1,
+            "Fecha_Inicio": "2023-08-19",
+            "Fecha_Fin": "2023-08-21",
+            "Costo_Total": "600.000",
+            "Estado": "Alquilado",
+            "Cliente": [
+            {
+                "_id": 1,
+                "ID_Cliente": 1,
+                "Nombre": "Jhon",
+                "Apellido": "Bernal",
+                "DNI": 109821901,
+                "Telefono": 3123860654,
+                "Email": "jbernalsantiago@gmail.com"
+            }
+            ]
+        },
+        {
+            "ID_Alquiler": 4,
+            "cliente_id": 3,
+            "Fecha_Inicio": "2023-08-22",
+            "Fecha_Fin": "2023-08-24",
+            "Costo_Total": "800.000",
+            "Estado": "Alquilado",
+            "Cliente": [
+            {
+                "_id": 3,
+                "ID_Cliente": 3,
+                "Nombre": "Diego",
+                "Apellido": "Quintero",
+                "DNI": 109532412,
+                "Telefono": 3118124324,
+                "Email": "diegoquintero@gmail.com"
+            }
+            ]
+        }
+    ]
+    ```
+    </details>
 4. `/reserva/pendiente` Mostrar todas las reservas pendientes con los datos del cliente y el automóvil reservado.
-5. `/id/:id` **Importante** debe cambiar el `:id` por un **numero**. Obtener los detalles del alquiler con el ID_Alquilerespecífico.
+    <details>
+    <summary>Ejemplo de datos de salida</summary>
+
+    ```json
+    [
+        {
+            "_id": 1,
+            "ID_Reserva": 1,
+            "cliente_id": 2,
+            "automovil_id": 1,
+            "Fecha_Reserva": "11/08/2023",
+            "Fecha_Inicio": "18/08/2023",
+            "Fecha_Fin": "20/08/2023",
+            "Estado": "Pendiente",
+            "Cliente": [
+                {
+                    "_id": 2,
+                    "ID_Cliente": 2,
+                    "Nombre": "Daniel",
+                    "Apellido": "Hernandez",
+                    "DNI": 489213981,
+                    "Direccion": "Cr 4 #20-10",
+                    "Telefono": 3123342422,
+                    "Email": "danielhernandez@gmail.com"
+                }
+            ],
+            "Automovil": [
+                {
+                    "_id": 1,
+                    "ID_Automovil": 1,
+                    "Marca": "Renault",
+                    "Modelo": "Renault Sandero",
+                    "Anio": 2023,
+                    "Tipo": "Carro",
+                    "Capacidad": 4,
+                    "Precio_Diario": "500.000"
+                }
+            ]
+        },
+        {
+            "_id": 2,
+            "ID_Reserva": 2,
+            "cliente_id": 1,
+            "automovil_id": 1,
+            "Fecha_Reserva": "13/08/2023",
+            "Fecha_Inicio": "19/08/2023",
+            "Fecha_Fin": "22/08/2023",
+            "Estado": "Pendiente",
+            "Cliente": [
+                {
+                    "_id": 1,
+                    "ID_Cliente": 1,
+                    "Nombre": "Jhon",
+                    "Apellido": "Bernal",
+                    "DNI": 109821901,
+                    "Direccion": "Cr 6 #90-12",
+                    "Telefono": 3123860654,
+                    "Email": "jbernalsantiago@gmail.com"
+                }
+            ],
+            "Automovil": [
+                {
+                    "_id": 1,
+                    "ID_Automovil": 1,
+                    "Marca": "Renault",
+                    "Modelo": "Renault Sandero",
+                    "Anio": 2023,
+                    "Tipo": "Carro",
+                    "Capacidad": 4,
+                    "Precio_Diario": "500.000"
+                }
+            ]
+        }
+    ]
+    ```
+    </details>
+5. `/alquiler/id/:id` **Importante** debe cambiar el `:id` por un **numero**. Obtener los detalles del alquiler con el ID_Alquilerespecífico.
+    <details>
+    <summary>Ejemplo de datos de salida cuando el id es 5</summary>
+
+    ```json
+    {
+        "_id": 5,
+        "ID_Alquiler": 5,
+        "cliente_id": 4,
+        "automovil_id": 5,
+        "Fecha_Inicio": "2023-08-24",
+        "Fecha_Fin": "2023-08-27",
+        "Costo_Total": "900.000",
+        "Estado": "Disponible"
+    }
+    ```
+    </details>
 6. `/empleado/vendedor` Listar los empleados con el Cargo de "Vendedor".
+    <details>
+    <summary>Ejemplo de datos de salida</summary>
+
+    ```json
+    [
+        {
+            "_id": 1,
+            "ID_Empleado": 1,
+            "Nombre": "James Ronald",
+            "Apellido": "Bernal Bermudez",
+            "DNI": 91514559,
+            "Direccion": "Cr8 #12-12",
+            "Telefono": 3127141832,
+            "Cargo": "Vendedor"
+        },
+        {
+            "_id": 5,
+            "ID_Empleado": 5,
+            "Nombre": "Andres",
+            "Apellido": "Sepulveda",
+            "DNI": 65423442,
+            "Direccion": "Cr12 #12-12",
+            "Telefono": 312314322,
+            "Cargo": "Vendedor"
+        }
+    ]
+    ```
+    </details>
 7. `/sucursal_automovil/automovil` Mostrar la cantidad total de automóviles disponibles en cada sucursal.
+    <details>
+    <summary>Ejemplo de datos de salida</summary>
+
+    ```json
+    [
+        {
+            "_id": 5,
+            "Cantidad_Total_Disponible": 4
+        },
+        {
+            "_id": 1,
+            "Cantidad_Total_Disponible": 5
+        },
+        {
+            "_id": 4,
+            "Cantidad_Total_Disponible": 8
+        },
+        {
+            "_id": 2,
+            "Cantidad_Total_Disponible": 3
+        }
+    ]   
+    ```
+    </details>
 8. `/alquiler/costo/:id` Obtener el costo total de un alquiler específico.
-9. `/dni/:dni` **Importante** debe cambiar el `:dni` por el dni especifico ejemplo: `489213981`. Listar los clientes con el DNI específico.
+    <details>
+    <summary>Ejemplo de datos de salida cuando el id es 4</summary>
+
+    ```json
+    [
+        {
+            "ID_Alquiler": 4,
+            "Costo_Total": "800.000"
+        }
+    ]   
+    ```
+    </details>
+9. `/cliente/dni/:dni` **Importante** debe cambiar el `:dni` por el dni especifico ejemplo: `489213981`. Listar los clientes con el DNI específico.
+    <details>
+    <summary>Ejemplo de datos de salida</summary>
+    
+    ```json
+    {
+        "_id": 2,
+        "ID_Cliente": 2,
+        "Nombre": "Daniel",
+        "Apellido": "Hernandez",
+        "DNI": 489213981,
+        "Direccion": "Cr 4 #20-10",
+        "Telefono": 3123342422,
+        "Email": "danielhernandez@gmail.com"
+    }
+    ```
+    </details>
 10. `/automovil/mayor` Mostrar todos los automóviles con una capacidad mayor a 5 personas.
-11. `/alquiler/fecha` Obtener los detalles del alquiler que tiene fecha de inicio en.
+    <details>
+    <summary>Ejemplo de datos de salida</summary>
+
+    ```json
+    [
+        {
+            "_id": 2,
+            "ID_Automovil": 2,
+            "Marca": "Renault",
+            "Modelo": "Renault 123",
+            "Anio": 2020,
+            "Tipo": "Carro",
+            "Capacidad": 6,
+            "Precio_Diario": "300.000"
+        },
+        {
+            "_id": 3,
+            "ID_Automovil": 3,
+            "Marca": "Renault",
+            "Modelo": "Renault 321",
+            "Anio": 2021,
+            "Tipo": "Carro",
+            "Capacidad": 7,
+            "Precio_Diario": "122.000"
+        }
+    ]
+    ```
+    </details>
+11. `/alquiler/fecha` Obtener los detalles del alquiler que tiene fecha de inicio en '2023-07-05'.
+    <details>
+    <summary>Ejemplo de datos de salida</summary>
+
+    ```json
+    [
+        {
+            "_id": 3,
+            "ID_Alquiler": 3,
+            "cliente_id": 1,
+            "automovil_id": 3,
+            "Fecha_Inicio": "2023-07-05",
+            "Fecha_Fin": "2023-08-21",
+            "Costo_Total": "500.000",
+            "Estado": "Disponible"
+        }
+    ]
+    ```
+    </details>
 12. `/cliente/pendiente/:id` **Importante** debe cambiar el `:id` por un **numero**. Listar las reservas pendientes realizadas por un cliente específico.
 13. `/empleado/cargo` Mostrar los empleados con cargo de "Gerente" o "Asistente.
 14. `/cliente/alquiler` Obtener los datos de los clientes que realizaron al menos un alquiler.
