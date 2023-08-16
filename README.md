@@ -396,14 +396,292 @@ Ejercicio de alquileres para practicar mongo, se creo la base de datos según es
     ```
     </details>
 12. `/cliente/pendiente/:id` **Importante** debe cambiar el `:id` por un **numero**. Listar las reservas pendientes realizadas por un cliente específico.
+    <details>
+    <summary>Ejemplo de dato de salida cuando el id es 1</summary>
+    
+    ```json
+    [
+        {
+            "_id": 1,
+            "Reserva": [
+                {
+                    "ID_Reserva": 2,
+                    "cliente_id": 1,
+                    "Fecha_Inicio": "19/08/2023",
+                    "Fecha_Fin": "22/08/2023",
+                    "Estado": "Pendiente"
+                }
+            ]
+        }
+    ]
+    ```
+    </details>
 13. `/empleado/cargo` Mostrar los empleados con cargo de "Gerente" o "Asistente.
+    <details>
+    <summary>Ejemplo de datos de salida</summary>
+
+    ```json
+    [
+        {
+            "_id": 2,
+            "ID_Empleado": 2,
+            "Nombre": "Stiven",
+            "Apellido": "Carvajal",
+            "DNI": 84392389,
+            "Direccion": "Cr4 #20-40",
+            "Telefono": 3124234876,
+            "Cargo": "Gerente"
+        },
+        {
+            "_id": 3,
+            "ID_Empleado": 3,
+            "Nombre": "Miguel",
+            "Apellido": "Carrillo",
+            "DNI": 64432341,
+            "Direccion": "Cr2 #54-21",
+            "Telefono": 312343245,
+            "Cargo": "Asistente"
+        },
+        {
+            "_id": 4,
+            "ID_Empleado": 4,
+            "Nombre": "Jolver",
+            "Apellido": "Prado",
+            "DNI": 53423412,
+            "Direccion": "Cr43 #76-98",
+            "Telefono": 312334344,
+            "Cargo": "Asistente"
+        }
+    ]
+    ```
+    </details>
 14. `/cliente/alquiler` Obtener los datos de los clientes que realizaron al menos un alquiler.
+    <details>
+    <summary>Ejemplo de datos de salida</summary>
+
+    ```json
+    [
+        {
+            "_id": 1,
+            "ID_Cliente": 1,
+            "Nombre": "Jhon",
+            "Apellido": "Bernal",
+            "DNI": 109821901,
+            "Direccion": "Cr 6 #90-12",
+            "Telefono": 3123860654,
+            "Email": "jbernalsantiago@gmail.com"
+        },
+        {
+            "_id": 2,
+            "ID_Cliente": 2,
+            "Nombre": "Daniel",
+            "Apellido": "Hernandez",
+            "DNI": 489213981,
+            "Direccion": "Cr 4 #20-10",
+            "Telefono": 3123342422,
+            "Email": "danielhernandez@gmail.com"
+        },
+        {
+            "_id": 3,
+            "ID_Cliente": 3,
+            "Nombre": "Diego",
+            "Apellido": "Quintero",
+            "DNI": 109532412,
+            "Direccion": "Cr 3 #30-2",
+            "Telefono": 3118124324,
+            "Email": "diegoquintero@gmail.com"
+        },
+        {
+            "_id": 4,
+            "ID_Cliente": 4,
+            "Nombre": "Angie",
+            "Apellido": "Cala",
+            "DNI": 100532853,
+            "Direccion": "Cr 1 #50-40",
+            "Telefono": 3118128028,
+            "Email": "angiecala@gmail.com"
+        }
+    ]
+    ```
+    </details>
 15. `/automovil/ordenado` Listar todos los automóviles ordenados por marca y modelo.
+    <details>
+    <summary>Ejemplo de datos de salida</summary>
+    
+    ```json
+    [
+        {
+            "_id": 2,
+            "ID_Automovil": 2,
+            "Marca": "Renault",
+            "Modelo": "Renault 123",
+            "Anio": 2020,
+            "Tipo": "Carro",
+            "Capacidad": 6,
+            "Precio_Diario": "300.000"
+        },
+        {
+            "_id": 3,
+            "ID_Automovil": 3,
+            "Marca": "Renault",
+            "Modelo": "Renault 321",
+            "Anio": 2021,
+            "Tipo": "Carro",
+            "Capacidad": 7,
+            "Precio_Diario": "122.000"
+        },
+        {
+            "_id": 4,
+            "ID_Automovil": 4,
+            "Marca": "Renault",
+            "Modelo": "Renault 432",
+            "Anio": 2010,
+            "Tipo": "Carro",
+            "Capacidad": 5,
+            "Precio_Diario": "600.000"
+        },
+        {
+            "_id": 5,
+            "ID_Automovil": 5,
+            "Marca": "Renault",
+            "Modelo": "Renault 543",
+            "Anio": 2019,
+            "Tipo": "Carro",
+            "Capacidad": 4,
+            "Precio_Diario": "102.000"
+        },
+        {
+            "_id": 1,
+            "ID_Automovil": 1,
+            "Marca": "Renault",
+            "Modelo": "Renault Sandero",
+            "Anio": 2023,
+            "Tipo": "Carro",
+            "Capacidad": 4,
+            "Precio_Diario": "500.000"
+        }
+    ]
+    ```
+    </details>
 16. `/sucursal/automovil` Mostrar la cantidad total de automóviles en cada sucursal junto con su dirección.
-17. `/alquiler/cantidad` Obtener la cantidad total de alquileres registrados en la base de datos. 
+    <details>
+    <summary>Ejemplo de datos de salida</summary>
+
+    ```json
+    [
+        {
+            "_id": 2,
+            "ID_sucursal": 2,
+            "Nombre": "Mexico",
+            "Direccion": "City Mecico",
+            "Telefono": 123457632,
+            "Automovil": [
+                {
+                    "_id": 2,
+                    "sucursal_id": 2,
+                    "automovil_id": 3,
+                    "Cantidad_Disponible": 3
+                }
+            ]
+        },
+        {
+            "_id": 4,
+            "ID_sucursal": 4,
+            "Nombre": "La colina",
+            "Direccion": "United Kingdom",
+            "Telefono": 1234213413,
+            "Telfono": null,
+            "Automovil": [
+                {
+                    "_id": 4,
+                    "sucursal_id": 4,
+                    "automovil_id": 1,
+                    "Cantidad_Disponible": 4
+                },
+                {
+                    "_id": 5,
+                    "sucursal_id": 4,
+                    "automovil_id": 5,
+                    "Cantidad_Disponible": 4
+                }
+            ]
+        },
+        {
+            "_id": 5,
+            "ID_sucursal": 5,
+            "Nombre": "Miami",
+            "Direccion": "EEUU",
+            "Telefono": 754532344,
+            "Automovil": [
+                {
+                    "_id": 3,
+                    "sucursal_id": 5,
+                    "automovil_id": 2,
+                    "Cantidad_Disponible": 4
+                }
+            ]
+        }
+    ]
+    ```
+    </details>
+17. `/alquiler/cantidad` Obtener la cantidad total de alquileres registrados en la base de datos.
+    <details>
+    <summary>Ejemplo de datos de salida</summary>
+    
+    ```json
+    {
+        "cantidad": 5
+    }
+    ```
+    </details>
 18. `/automovil/capacidad` Mostrar los automóviles con capacidad igual a 5 personas y que estén disponibles.
-19. `/cliente//reserva/:id` **Importante** debe cambiar el `:id` por un **numero**. Obtener los datos del cliente que realizó la reserva con ID_Reserva específico.
+    <details>
+    <summary>Ejemplo de datos de salida</summary>
+
+    ```json
+    {
+        "message": "No hay datos que coincidan"
+    }
+    ```
+    </details>
+19. `/cliente/reserva/:id` **Importante** debe cambiar el `:id` por un **numero**. Obtener los datos del cliente que realizó la reserva con ID_Reserva específico.
+    <details>
+    <summary>Ejemplo de datos de salida cuando el id es 1</summary>
+
+    ```json
+    [
+        {
+            "_id": 2,
+            "ID_Cliente": 2,
+            "Nombre": "Daniel",
+            "Apellido": "Hernandez",
+            "DNI": 489213981,
+            "Direccion": "Cr 4 #20-10",
+            "Telefono": 3123342422,
+            "Email": "danielhernandez@gmail.com"
+        }
+    ]
+    ```
+    </details>
 20. `/alquiler/entre` Listar los alquileres con fecha de inicio entre '2023-07-05' y '2023-07-10'.
+    <details>
+    <summary>Ejemplo de datos de salida</summary>
+    
+    ```json
+    [
+        {
+            "_id": 3,
+            "ID_Alquiler": 3,
+            "cliente_id": 1,
+            "automovil_id": 3,
+            "Fecha_Inicio": "2023-07-05",
+            "Fecha_Fin": "2023-08-21",
+            "Costo_Total": "500.000",
+            "Estado": "Disponible"
+        }
+    ]
+    ```
+    </details>
 ## Contacto
 Autor: Jhon Santiago Bernal Jurado.
 
