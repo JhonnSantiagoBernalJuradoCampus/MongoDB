@@ -34,18 +34,10 @@ middlewareVerify.use((req,res,next)=>{
     payload = newPayLoad;
 
     // Convertir las fechas en objetos Date
-    const payloadDateObjects = {
-        ...payload,
-        Fecha_Inicio: new Date(payload.Fecha_Inicio),
-        Fecha_Fin: new Date(payload.Fecha_Fin)
-    };
+    const payloadDateObjects = {...payload};
 
     // Crear un clon del DTO original con las fechas convertidas
-    const Clone = {
-        ...payload,
-        Fecha_Inicio: new Date(payload.Fecha_Inicio),
-        Fecha_Fin: new Date(payload.Fecha_Fin)
-    };
+    const Clone = {...payload};
     console.log(payload);
     console.log(Clone);
 

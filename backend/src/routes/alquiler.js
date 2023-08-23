@@ -4,7 +4,7 @@ import { limit } from "../middleware/limit.js";
 import { middlewareVerify } from "../middleware/proxyAlquiler.js";
 const router = Router();
 
-router.get("/alquilado",limit(), middlewareVerify, async (req,res)=>{
+router.get("/alquilado",limit(), async (req,res)=>{
     if(!req.rateLimit) return;
     try {
         const db = await connectionDB();

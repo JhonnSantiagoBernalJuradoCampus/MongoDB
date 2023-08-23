@@ -14,8 +14,8 @@ export default class AlquilerDto {
         Object.assign(this, data);
         this._id = 0;
         this.ID_Alquiler = 0;
-        this.ID_Cliente_id = 0;
-        this.ID_Automovil_id = 0;
+        this.cliente_id = 0;
+        this.automovil_id = 0;
         this.Fecha_Fin = "";
         this.Fecha_Inicio = "";
         this.Costo_Total = 0;
@@ -35,17 +35,17 @@ __decorate([
     __metadata("design:type", Number)
 ], AlquilerDto.prototype, "ID_Alquiler", void 0);
 __decorate([
-    Expose({ name: 'ID_Cliente_id' }),
+    Expose({ name: 'cliente_id' }),
     IsInt(),
-    IsDefined({ message: 'El ID_Cliente_id es obligatorio' }),
+    IsDefined({ message: 'El cliente_id es obligatorio' }),
     __metadata("design:type", Number)
-], AlquilerDto.prototype, "ID_Cliente_id", void 0);
+], AlquilerDto.prototype, "cliente_id", void 0);
 __decorate([
-    Expose({ name: 'ID_Automovil_id' }),
+    Expose({ name: 'automovil_id' }),
     IsInt(),
-    IsDefined({ message: 'El ID_Automovil_id es obligatorio' }),
+    IsDefined({ message: 'El automovil_id es obligatorio' }),
     __metadata("design:type", Number)
-], AlquilerDto.prototype, "ID_Automovil_id", void 0);
+], AlquilerDto.prototype, "automovil_id", void 0);
 __decorate([
     Expose({ name: 'Fecha_Inicio' }),
     IsString(),

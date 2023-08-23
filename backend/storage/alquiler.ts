@@ -12,15 +12,15 @@ export default class AlquilerDto {
     @IsDefined({ message: 'El ID_Alquiler es obligatorio' })
     ID_Alquiler: number;
 
-    @Expose({ name: 'ID_Cliente_id' })
+    @Expose({ name: 'cliente_id' })
     @IsInt()
-    @IsDefined({ message: 'El ID_Cliente_id es obligatorio' })
-    ID_Cliente_id: number;
+    @IsDefined({ message: 'El cliente_id es obligatorio' })
+    cliente_id: number;
 
-    @Expose({ name: 'ID_Automovil_id' })
+    @Expose({ name: 'automovil_id' })
     @IsInt()
-    @IsDefined({ message: 'El ID_Automovil_id es obligatorio' })
-    ID_Automovil_id: number;
+    @IsDefined({ message: 'El automovil_id es obligatorio' })
+    automovil_id: number;
 
     @Expose({ name: 'Fecha_Inicio' })
     @IsString()
@@ -48,8 +48,8 @@ export default class AlquilerDto {
         Object.assign(this, data);
         this._id = 0;
         this.ID_Alquiler = 0;
-        this.ID_Cliente_id = 0;
-        this.ID_Automovil_id = 0;
+        this.cliente_id = 0;
+        this.automovil_id = 0;
         this.Fecha_Fin="";
         this.Fecha_Inicio="";
         this.Costo_Total = 0;

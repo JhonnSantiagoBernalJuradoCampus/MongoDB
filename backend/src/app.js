@@ -17,12 +17,12 @@ app.use(express.json());
 app.use("/token", appToken);
 
 app.use("/alquiler", appVerify, alquilerRouter);
-app.use("/cliente", clienteRouter);
-app.use("/automovil", automovilRouter);
-app.use("/reserva", reservaRouter);
-app.use("/empleado", empleadoRouter);
-app.use("/sucursal_automovil", sucursalAutomovilRouter);
-app.use("/sucursal", sucursalRouter);
+app.use("/cliente", appVerify, clienteRouter);
+app.use("/automovil", appVerify, automovilRouter);
+app.use("/reserva", appVerify, reservaRouter);
+app.use("/empleado", appVerify, empleadoRouter);
+app.use("/sucursal_automovil", appVerify, sucursalAutomovilRouter);
+app.use("/sucursal", appVerify, sucursalRouter);
 
 const config = JSON.parse(process.env.MY_CONFIG);
 app.listen(config, ()=>{
