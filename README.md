@@ -25,6 +25,7 @@ Ejercicio de alquileres para practicar mongo, se creo la base de datos según es
 1. **Crear** el token, debe acceder al endpoint `/token/mongo` el cual será el que le permitirá acceder a todas las rutas
 2. Copiar el token y ponerlo en headers en el espaciado **Authorization**  como en este ejemplo: 
 <img src="./backend/assets/ejemplo.png">
+
 ## Get
 ### Endpoints
 1. `/cliente` Mostrar todos lo clientes registrados en la base de datos.
